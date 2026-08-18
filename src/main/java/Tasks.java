@@ -21,8 +21,27 @@ public class Tasks {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < index; i++) {
             int id = i + 1;
-            sb.append(" ").append(id).append(". ").append(tasks[i].toString()).append("\n");
+            Task t = tasks[i];
+            sb.append(" ").append(id).append(".[").append(t.getStatusIcon()).append("] ").append(t.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    public Task mark(int taskNumber) {
+        int idx = taskNumber - 1;
+        if (idx < 0 || idx >= index) {
+            return null;
+        }
+        tasks[idx].markAsDone();
+        return tasks[idx];
+    }
+
+    public Task unmark(int taskNumber) {
+        int idx = taskNumber - 1;
+        if (idx < 0 || idx >= index) {
+            return null;
+        }
+        tasks[idx].markAsNotDone();
+        return tasks[idx];
     }
 }
