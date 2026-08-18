@@ -9,8 +9,29 @@ public class Dulio {
         System.out.println(banner);
         System.out.println("Hello! I'm Dulio.");
         System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("____________________________________________________________");
+
+        java.util.Scanner sc = new java.util.Scanner(System.in);
+        while (true) {
+            System.out.println("____________________________________________________________");
+            if (!sc.hasNextLine()) {
+                break;
+            }
+            String line = sc.nextLine();
+            System.out.println("____________________________________________________________");
+
+            // Hardcoded switch behavior
+            switch (line) {
+                case "bye":
+                    System.out.println(" Bye. Hope to see you again soon!");
+                    System.out.println("____________________________________________________________");
+                    sc.close();
+                    return;
+                default:
+                    System.out.println(" " + line);
+                    System.out.println("____________________________________________________________");
+                    break;
+            }
+        }
+        sc.close();
     }
 }
