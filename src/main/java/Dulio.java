@@ -10,6 +10,8 @@ public class Dulio {
         System.out.println("Hello! I'm Dulio.");
         System.out.println("What can I do for you?");
 
+        // in-memory storage for up to 100 tasks
+        Tasks tasks = new Tasks(100);
         java.util.Scanner sc = new java.util.Scanner(System.in);
         while (true) {
             System.out.println("____________________________________________________________");
@@ -26,8 +28,21 @@ public class Dulio {
                     System.out.println("____________________________________________________________");
                     sc.close();
                     return;
+                case "list":
+                    String listed = tasks.list();
+                    if (listed.isEmpty()) {
+                        // no tasks
+                        System.out.println(" (no tasks)");
+                        System.out.println("____________________________________________________________");
+                    } else {
+                        System.out.print(listed);
+                        System.out.println("____________________________________________________________");
+                    }
+                    break;
                 default:
-                    System.out.println(" " + line);
+                    // store any other input as a task
+                    tasks.store(line);
+                    System.out.println(" added: " + line);
                     System.out.println("____________________________________________________________");
                     break;
             }
