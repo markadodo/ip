@@ -1,10 +1,10 @@
-public class Tasks {
-    private Task[] tasks;
-    private int index = 0;
+import java.util.ArrayList;
 
-    public Tasks(int size) {
-        // Use the provided size (max 100 recommended by requirement)
-        tasks = new Task[size];
+public class Tasks {
+    private ArrayList<Task> tasks;
+
+    public Tasks() {
+        tasks = new ArrayList<>();
     }
 
     public void store(String description) {
@@ -12,23 +12,18 @@ public class Tasks {
     }
 
     public void store(Task task) {
-        if (index >= tasks.length) {
-            // ignore additional tasks beyond capacity
-            return;
-        }
-        tasks[index++] = task;
-
+        tasks.add(task);
     }
 
     public int size() {
-        return index;
+        return tasks.size();
     }
 
     public String list() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             int id = i + 1;
-            Task t = tasks[i];
+            Task t = tasks.get(i);
             sb.append(" ").append(id).append(".[").append(t.getTypeIcon()).append("][")
                 .append(t.getStatusIcon()).append("] ").append(t.toString()).append("\n");
         }
@@ -37,19 +32,27 @@ public class Tasks {
 
     public Task mark(int taskNumber) {
         int idx = taskNumber - 1;
-        if (idx < 0 || idx >= index) {
+        if (idx < 0 || idx >= tasks.size()) {
             return null;
         }
-        tasks[idx].markAsDone();
-        return tasks[idx];
+        tasks.get(idx).markAsDone();
+        return tasks.get(idx);
     }
 
     public Task unmark(int taskNumber) {
         int idx = taskNumber - 1;
-        if (idx < 0 || idx >= index) {
+        if (idx < 0 || idx >= tasks.size()) {
             return null;
         }
-        tasks[idx].markAsNotDone();
-        return tasks[idx];
+        tasks.get(idx).markAsNotDone();
+        return tasks.get(idx);
+    }
+
+    public Task delete(int taskNumber) {
+        int idx = taskNumber - 1;
+        if (idx < 0 || idx >= tasks.size()) {
+            return null;
+        }
+        return tasks.remove(idx);
     }
 }

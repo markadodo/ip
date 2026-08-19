@@ -11,7 +11,7 @@ public class Dulio {
         System.out.println("What can I do for you?");
 
         // in-memory storage for up to 100 tasks
-        Tasks tasks = new Tasks(100);
+        Tasks tasks = new Tasks();
         java.util.Scanner sc = new java.util.Scanner(System.in);
         System.out.println("____________________________________________________________");
         while (true) {
@@ -34,6 +34,22 @@ public class Dulio {
                     System.out.println(" (no tasks)");
                 } else {
                     System.out.print(listed);
+                }
+                System.out.println("____________________________________________________________");
+            } else if (line.startsWith("delete ")) {
+                String arg = line.substring(7).trim();
+                try {
+                    int n = Integer.parseInt(arg);
+                    Task t = tasks.delete(n);
+                    if (t == null) {
+                        System.out.println(" Invalid task index");
+                    } else {
+                        System.out.println(" Noted. I've removed this task:");
+                        System.out.println("   [" + t.getTypeIcon() + "][" + t.getStatusIcon() + "] " + t);
+                        System.out.println("   Now you have " + tasks.size() + " tasks in the list.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println(" Invalid task index");
                 }
                 System.out.println("____________________________________________________________");
             } else if (line.startsWith("mark ")) {
