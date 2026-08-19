@@ -13,8 +13,8 @@ public class Dulio {
         // in-memory storage for up to 100 tasks
         Tasks tasks = new Tasks(100);
         java.util.Scanner sc = new java.util.Scanner(System.in);
+        System.out.println("____________________________________________________________");
         while (true) {
-            System.out.println("____________________________________________________________");
             if (!sc.hasNextLine()) {
                 break;
             }
@@ -46,7 +46,7 @@ public class Dulio {
                         System.out.println("____________________________________________________________");
                     } else {
                         System.out.println(" Nice! I've marked this task as done:");
-                        System.out.println("   [" + t.getStatusIcon() + "] " + t.toString());
+                        System.out.println("   [" + t.getTypeIcon() + "][" + t.getStatusIcon() + "] " + t.toString());
                         System.out.println("____________________________________________________________");
                     }
                 } catch (NumberFormatException e) {
@@ -63,7 +63,7 @@ public class Dulio {
                         System.out.println("____________________________________________________________");
                     } else {
                         System.out.println(" OK, I've marked this task as not done yet:");
-                        System.out.println("   [" + t.getStatusIcon() + "] " + t.toString());
+                        System.out.println("   [" + t.getTypeIcon() + "][" + t.getStatusIcon() + "] " + t.toString());
                         System.out.println("____________________________________________________________");
                     }
                 } catch (NumberFormatException e) {
@@ -71,12 +71,50 @@ public class Dulio {
                     System.out.println("____________________________________________________________");
                 }
             } else {
-                // store any other input as a task
-                tasks.store(line);
-                System.out.println(" added: " + line);
+                Task task = parseTask(line);
+                if (task == null) {
+                    System.out.println(" I couldn't understand that task.");
+                } else {
+                    tasks.store(task);
+                    System.out.println(" Got it. I've added this task:");
+                    System.out.println("   [" + task.getTypeIcon() + "][" + task.getStatusIcon() + "] " + task);
+                    System.out.println("   Now you have " + tasks.size() + " tasks in the list.");
+                }
                 System.out.println("____________________________________________________________");
             }
         }
         sc.close();
+    }
+
+    private static Task parseTask(String line) {
+        if (line.startsWith("todo ")) {
+            String description = line.substring(5).trim();
+            return description.isEmpty() ? null : new Todo(description);
+        }
+        if (line.startsWith("deadline ")) {
+            int marker = line.indexOf(" /by ", 9);
+            if (marker < 0) {
+                return null;
+            }
+            String description = line.substring(9, marker).trim();
+            String by = line.substring(marker + 5).trim();
+            return description.isEmpty() || by.isEmpty() ? null : new Deadline(description, by);
+        }
+        if (line.startsWith("event ")) {
+            int fromMarker = line.indexOf(" /from ", 6);
+            if (fromMarker < 0) {
+                return null;
+            }
+            int toMarker = line.indexOf(" /to ", fromMarker + 7);
+            if (toMarker < 0) {
+                return null;
+            }
+            String description = line.substring(6, fromMarker).trim();
+            String from = line.substring(fromMarker + 7, toMarker).trim();
+            String to = line.substring(toMarker + 5).trim();
+            return description.isEmpty() || from.isEmpty() || to.isEmpty()
+                ? null : new Event(description, from, to);
+        }
+        return null;
     }
 }

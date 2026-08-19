@@ -19,6 +19,10 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+    public String getTypeIcon() {
+        return "T";
+    }
+
     @Override
     public String toString() {
         return description;
