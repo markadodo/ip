@@ -50,3 +50,35 @@ ____________________________________________________________
  Bye. Hope to see you again soon!
 ____________________________________________________________
 ```
+
+## Case: reject-empty-and-unknown-commands
+
+### Aim
+Verify that an empty todo description and an unknown command produce clear error messages while the program continues accepting commands.
+
+### Inputs
+1. `todo`
+2. `blah`
+3. `bye`
+
+### Expected output
+```text
+ ____  _   _ _     ___ ___
+|  _ \| | | | |   |_ _/ _ \
+| | | | | | | |    | | | | |
+| |_| | |_| | |___ | | |_| |
+|____/ \___/|_____|___\___/
+
+Hello! I'm Dulio.
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! The description of a todo cannot be empty.
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! I'm sorry, but I don't know what that means :-(
+____________________________________________________________
+____________________________________________________________
+ Bye. Hope to see you again soon!
+____________________________________________________________
+```
