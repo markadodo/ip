@@ -94,7 +94,7 @@ public class Dulio {
                 }
             } else {
                 try {
-                    Task task = parseTask(line);
+                    Task task = Parser.parseTask(line);
                     tasks.store(task);
                     System.out.println(" Got it. I've added this task:");
                     System.out.println("   [" + task.getTypeIcon() + "][" + task.getStatusIcon() + "] " + task);
@@ -108,43 +108,4 @@ public class Dulio {
         sc.close();
     }
 
-    private static Task parseTask(String line) throws DulioException {
-        if (line.equals("todo") || line.startsWith("todo ")) {
-            String description = line.length() > 5 ? line.substring(5).trim() : "";
-            if (description.isEmpty()) {
-                throw new DulioException("OOPS!!! The description of a todo cannot be empty.");
-            }
-            return new Todo(description);
-        }
-        if (line.startsWith("deadline ")) {
-            int marker = line.indexOf(" /by ", 9);
-            if (marker < 0) {
-                throw new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            String description = line.substring(9, marker).trim();
-            String by = line.substring(marker + 5).trim();
-            if (description.isEmpty() || by.isEmpty()) {
-                throw new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            return new Deadline(description, by);
-        }
-        if (line.startsWith("event ")) {
-            int fromMarker = line.indexOf(" /from ", 6);
-            if (fromMarker < 0) {
-                throw new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            int toMarker = line.indexOf(" /to ", fromMarker + 7);
-            if (toMarker < 0) {
-                throw new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            String description = line.substring(6, fromMarker).trim();
-            String from = line.substring(fromMarker + 7, toMarker).trim();
-            String to = line.substring(toMarker + 5).trim();
-            if (description.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                throw new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            return new Event(description, from, to);
-        }
-        throw new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
-    }
 }
