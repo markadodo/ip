@@ -1,4 +1,5 @@
 package dulio.exception;
+
 /**
  * Represents an expected command error reported by Dulio.
  */
