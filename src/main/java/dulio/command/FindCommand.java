@@ -1,0 +1,32 @@
+package dulio.command;
+
+import java.io.IOException;
+
+import dulio.task.Tasks;
+import dulio.ui.Ui;
+
+/** Finds tasks whose descriptions contain a keyword. */
+public class FindCommand extends Command {
+    private String keyword;
+
+    /**
+     * Creates a find command.
+     *
+     * @param keyword the case-insensitive description keyword to search for
+     */
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
+    }
+
+    /**
+     * Finds matching tasks and displays them.
+     *
+     * @param tasks the task list to search
+     * @param ui the interface used for the response
+     * @throws IOException if persistence fails
+     */
+    @Override
+    public void execute(Tasks tasks, Ui ui) throws IOException {
+        ui.showFind(tasks.find(keyword));
+    }
+}

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import dulio.command.AddCommand;
 import dulio.command.DeleteCommand;
 import dulio.command.ExitCommand;
+import dulio.command.FindCommand;
 import dulio.command.ListCommand;
 import dulio.command.MarkCommand;
 import dulio.command.UnmarkCommand;
@@ -116,6 +117,16 @@ public class ParserTest {
     @Test
     public void parseCommand_taskCommand_returnsAddCommand() throws DulioException {
         assertInstanceOf(AddCommand.class, Parser.parseCommand("todo borrow book"));
+    }
+
+    @Test
+    public void parseCommand_find_returnsFindCommand() throws DulioException {
+        assertInstanceOf(FindCommand.class, Parser.parseCommand("find book"));
+    }
+
+    @Test
+    public void parseCommand_emptyFindKeyword_throwsDulioException() {
+        assertThrows(DulioException.class, () -> Parser.parseCommand("find"));
     }
 
     @Test

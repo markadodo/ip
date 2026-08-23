@@ -51,6 +51,65 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
+## Case: find-tasks-by-keyword
+
+### Aim
+Verify that `find` performs a case-insensitive search in task descriptions, preserves original task numbers, and reports when there are no matches.
+
+### Inputs
+1. `todo read book`
+2. `deadline return book /by 2019-06-06`
+3. `event project meeting /from Aug 6th 2pm /to 4pm`
+4. `todo join sports club`
+5. `find BOOK`
+6. `find airplane`
+7. `bye`
+
+### Expected output
+```text
+ ____  _   _ _     ___ ___
+|  _ \| | | | |   |_ _/ _ \
+| | | | | | | |    | | | | |
+| |_| | |_| | |___ | | |_| |
+|____/ \___/|_____|___\___/
+
+Hello! I'm Dulio.
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [T][ ] read book
+   Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [D][ ] return book (by: Jun 06 2019)
+   Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+   Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [T][ ] join sports club
+   Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Here are the matching tasks in your list:
+ 1.[T][ ] read book
+ 2.[D][ ] return book (by: Jun 06 2019)
+____________________________________________________________
+____________________________________________________________
+ Here are the matching tasks in your list:
+ (no matching tasks)
+____________________________________________________________
+____________________________________________________________
+ Bye. Hope to see you again soon!
+____________________________________________________________
+```
+
 ## Case: parse-and-format-deadline-date
 
 ### Aim

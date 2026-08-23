@@ -3,6 +3,7 @@ package dulio.task;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import dulio.storage.Storage;
 
@@ -54,12 +55,36 @@ public class Tasks {
      * @return the formatted task list
      */
     public String list() {
-        StringBuilder sb = new StringBuilder();
+        return formatTasks(tasks);
+    }
+
+    public String find(String keyword) {
+        String normalizedKeyword = keyword.toLowerCase(Locale.ENGLISH);
+        ArrayList<Task> matchingTasks = new ArrayList<>();
+        ArrayList<Integer> matchingNumbers = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
-            int id = i + 1;
-            Task t = tasks.get(i);
-            sb.append(" ").append(id).append(".[").append(t.getTypeIcon()).append("][")
-                .append(t.getStatusIcon()).append("] ").append(t.toString()).append("\n");
+            if (tasks.get(i).getDescription().toLowerCase(Locale.ENGLISH).contains(normalizedKeyword)) {
+                matchingTasks.add(tasks.get(i));
+                matchingNumbers.add(i + 1);
+            }
+        }
+        return formatTasks(matchingTasks, matchingNumbers);
+    }
+
+    private String formatTasks(ArrayList<Task> tasksToFormat) {
+        ArrayList<Integer> taskNumbers = new ArrayList<>();
+        for (int i = 0; i < tasksToFormat.size(); i++) {
+            taskNumbers.add(i + 1);
+        }
+        return formatTasks(tasksToFormat, taskNumbers);
+    }
+
+    private String formatTasks(ArrayList<Task> tasksToFormat, ArrayList<Integer> taskNumbers) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasksToFormat.size(); i++) {
+            Task task = tasksToFormat.get(i);
+            sb.append(" ").append(taskNumbers.get(i)).append(".[").append(task.getTypeIcon()).append("][")
+                .append(task.getStatusIcon()).append("] ").append(task.toString()).append("\n");
         }
         return sb.toString();
     }

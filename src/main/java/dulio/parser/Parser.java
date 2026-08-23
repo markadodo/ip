@@ -7,6 +7,7 @@ import dulio.command.AddCommand;
 import dulio.command.Command;
 import dulio.command.DeleteCommand;
 import dulio.command.ExitCommand;
+import dulio.command.FindCommand;
 import dulio.command.ListCommand;
 import dulio.command.MarkCommand;
 import dulio.command.UnmarkCommand;
@@ -94,6 +95,13 @@ public class Parser {
         }
         if ("list".equals(line)) {
             return new ListCommand();
+        }
+        if (line.startsWith("find ")) {
+            String keyword = line.substring(5).trim();
+            if (keyword.isEmpty()) {
+                throw unknownCommand();
+            }
+            return new FindCommand(keyword);
         }
         if (line.startsWith("delete ")) {
             return new DeleteCommand(parseTaskNumber(line.substring(7).trim()));
