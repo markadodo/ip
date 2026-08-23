@@ -1,5 +1,7 @@
+import java.io.IOException;
+
 public class Dulio {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String banner = " ____  _   _ _     ___ ___  \n"
             + "|  _ \\| | | | |   |_ _/ _ \\ \n"
             + "| | | | | | | |    | | | | |\n"

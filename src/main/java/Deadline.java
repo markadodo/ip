@@ -26,6 +26,10 @@ public class Deadline extends Task {
         return "D";
     }
 
+    public String getBy() {
+        return by;
+    }
+
     /**
      * Returns the task description together with its deadline.
      *

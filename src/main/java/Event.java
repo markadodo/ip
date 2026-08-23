@@ -30,6 +30,14 @@ public class Event extends Task {
         return "E";
     }
 
+    public String getFrom() {
+        return from;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
     /**
      * Returns the event description together with its start and end times.
      *
