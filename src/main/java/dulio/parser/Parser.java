@@ -17,6 +17,10 @@ import dulio.task.Todo;
 
 /** Parses Dulio commands and date values. */
 public class Parser {
+    /** Creates a parser. */
+    private Parser() {
+    }
+
     /**
      * Converts an ISO date string into a date.
      *
@@ -76,6 +80,13 @@ public class Parser {
         throw unknownCommand();
     }
 
+    /**
+     * Converts a complete console line into an executable command.
+     *
+     * @param line the complete console command
+     * @return the corresponding command object
+     * @throws DulioException if the command or its arguments are invalid
+     */
     public static Command parseCommand(String line) throws DulioException {
         if ("bye".equals(line)) {
             return new ExitCommand();
