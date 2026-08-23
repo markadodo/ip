@@ -7,10 +7,6 @@ public class Tasks {
         tasks = new ArrayList<>();
     }
 
-    public void store(String description) {
-        store(new Task(description));
-    }
-
     public void store(Task task) {
         tasks.add(task);
     }
