@@ -1,23 +1,23 @@
 import java.util.ArrayList;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Tasks {
     private ArrayList<Task> tasks;
-    private Path storagePath;
+    private Storage storage;
 
     public Tasks() {
-        tasks = new ArrayList<>();
-        storagePath = Path.of("data", "dulio.txt");
-        load();
+        this(new Storage(Path.of("data", "dulio.txt")));
+    }
+
+    public Tasks(Storage storage) {
+        this.storage = storage;
+        tasks = storage.load();
     }
 
     public void store(Task task) throws IOException {
         tasks.add(task);
-        save();
+        storage.save(tasks);
     }
 
     public int size() {
@@ -41,7 +41,7 @@ public class Tasks {
             return null;
         }
         tasks.get(idx).markAsDone();
-        save();
+        storage.save(tasks);
         return tasks.get(idx);
     }
 
@@ -51,7 +51,7 @@ public class Tasks {
             return null;
         }
         tasks.get(idx).markAsNotDone();
-        save();
+        storage.save(tasks);
         return tasks.get(idx);
     }
 
@@ -61,61 +61,7 @@ public class Tasks {
             return null;
         }
         Task deletedTask = tasks.remove(idx);
-        save();
+        storage.save(tasks);
         return deletedTask;
-    }
-
-    private void load() {
-        if (!Files.exists(storagePath)) {
-            return;
-        }
-        try {
-            for (String line : Files.readAllLines(storagePath)) {
-                String[] fields = line.split("\\s\\|\\s", -1);
-                if (fields.length < 3 || !(fields[1].equals("0") || fields[1].equals("1"))) {
-                    continue;
-                }
-                Task task;
-                try {
-                    if (fields[0].equals("D") && fields.length == 4) {
-                        task = new Deadline(fields[2], LocalDate.parse(fields[3]));
-                    } else if (fields[0].equals("E") && fields.length == 5) {
-                        task = new Event(fields[2], fields[3], fields[4]);
-                    } else if (fields[0].equals("T") && fields.length == 3) {
-                        task = new Todo(fields[2]);
-                    } else {
-                        continue;
-                    }
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-                if (fields[1].equals("1")) {
-                    task.markAsDone();
-                }
-                tasks.add(task);
-            }
-        } catch (IOException e) {
-            tasks.clear();
-        }
-    }
-
-    private void save() throws IOException {
-        Path parent = storagePath.getParent();
-        if (parent != null) {
-            Files.createDirectories(parent);
-        }
-        ArrayList<String> lines = new ArrayList<>();
-        for (Task task : tasks) {
-            String status = task.isDone() ? "1" : "0";
-            if (task instanceof Deadline deadline) {
-                lines.add("D | " + status + " | " + deadline.description + " | " + deadline.getBy());
-            } else if (task instanceof Event event) {
-                lines.add("E | " + status + " | " + event.description + " | "
-                    + event.getFrom() + " | " + event.getTo());
-            } else {
-                lines.add("T | " + status + " | " + task.description);
-            }
-        }
-        Files.write(storagePath, lines);
     }
 }

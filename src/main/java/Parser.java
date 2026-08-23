@@ -62,6 +62,33 @@ public class Parser {
         throw unknownCommand();
     }
 
+    public static Command parseCommand(String line) throws DulioException {
+        if ("bye".equals(line)) {
+            return new ExitCommand();
+        }
+        if ("list".equals(line)) {
+            return new ListCommand();
+        }
+        if (line.startsWith("delete ")) {
+            return new DeleteCommand(parseTaskNumber(line.substring(7).trim()));
+        }
+        if (line.startsWith("mark ")) {
+            return new MarkCommand(parseTaskNumber(line.substring(5).trim()));
+        }
+        if (line.startsWith("unmark ")) {
+            return new UnmarkCommand(parseTaskNumber(line.substring(7).trim()));
+        }
+        return new AddCommand(parseTask(line));
+    }
+
+    private static int parseTaskNumber(String value) throws DulioException {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new DulioException("Invalid task index");
+        }
+    }
+
     private static DulioException unknownCommand() {
         return new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
