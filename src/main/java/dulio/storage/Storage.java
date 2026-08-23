@@ -14,6 +14,7 @@ import dulio.task.Todo;
 
 /** Handles loading tasks from and saving tasks to the data file. */
 public class Storage {
+    /** File used to persist task records. */
     private Path filePath;
 
     /**
@@ -25,7 +26,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /** Loads valid task records, returning an empty list if the file is absent. */
+    /**
+     * Loads valid task records, returning an empty list if the file is absent
+     * or cannot be read.
+     *
+     * @return the loaded tasks
+     */
     public ArrayList<Task> load() {
         ArrayList<Task> loadedTasks = new ArrayList<>();
         if (!Files.exists(filePath)) {
@@ -62,7 +68,12 @@ public class Storage {
         return loadedTasks;
     }
 
-    /** Saves all task records, creating the parent directory when necessary. */
+    /**
+     * Saves all task records, creating the parent directory when necessary.
+     *
+     * @param tasks the tasks to persist
+     * @throws IOException if the file cannot be written
+     */
     public void save(List<Task> tasks) throws IOException {
         Path parent = filePath.getParent();
         if (parent != null) {

@@ -31,10 +31,20 @@ public class Event extends Task {
         return "E";
     }
 
+    /**
+     * Returns the event start value.
+     *
+     * @return the event start value
+     */
     public String getFrom() {
         return from;
     }
 
+    /**
+     * Returns the event end value.
+     *
+     * @return the event end value
+     */
     public String getTo() {
         return to;
     }

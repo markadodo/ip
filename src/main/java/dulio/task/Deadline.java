@@ -14,7 +14,7 @@ public class Deadline extends Task {
      * Creates a deadline task.
      *
      * @param description the task description
-    * @param by the date by which the task should be completed
+        * @param by the date by which the task should be completed
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -31,6 +31,11 @@ public class Deadline extends Task {
         return "D";
     }
 
+    /**
+     * Returns the deadline date.
+     *
+     * @return the deadline date
+     */
     public LocalDate getBy() {
         return by;
     }
