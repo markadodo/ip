@@ -1,4 +1,11 @@
+package dulio;
 import java.io.IOException;
+
+import dulio.command.Command;
+import dulio.exception.DulioException;
+import dulio.parser.Parser;
+import dulio.task.Tasks;
+import dulio.ui.Ui;
 public class Dulio {
     public static void main(String[] args) throws IOException {
         new Dulio().run();

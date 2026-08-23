@@ -1,4 +1,8 @@
+package dulio.command;
 import java.io.IOException;
+
+import dulio.task.Tasks;
+import dulio.ui.Ui;
 
 /** Represents a parsed command that can be executed by Dulio. */
 public abstract class Command {

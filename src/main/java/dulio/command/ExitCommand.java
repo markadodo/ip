@@ -1,4 +1,8 @@
+package dulio.command;
 import java.io.IOException;
+
+import dulio.task.Tasks;
+import dulio.ui.Ui;
 
 /** Ends the Dulio session. */
 public class ExitCommand extends Command {

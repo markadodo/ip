@@ -1,4 +1,9 @@
+package dulio.command;
 import java.io.IOException;
+
+import dulio.task.Task;
+import dulio.task.Tasks;
+import dulio.ui.Ui;
 
 /** Adds a parsed task to the task list. */
 public class AddCommand extends Command {

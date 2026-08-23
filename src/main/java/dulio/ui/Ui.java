@@ -1,4 +1,7 @@
+package dulio.ui;
 import java.util.Scanner;
+
+import dulio.task.Task;
 
 /** Handles Dulio's interaction with the console user. */
 public class Ui {

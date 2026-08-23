@@ -1,3 +1,4 @@
+package dulio.task;
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -21,6 +22,10 @@ public class Task {
 
     public boolean isDone() {
         return isDone;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public String getTypeIcon() {

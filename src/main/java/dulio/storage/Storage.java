@@ -1,3 +1,4 @@
+package dulio.storage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -5,6 +6,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import dulio.task.Deadline;
+import dulio.task.Event;
+import dulio.task.Task;
+import dulio.task.Todo;
 
 /** Handles loading tasks from and saving tasks to the data file. */
 public class Storage {
@@ -66,12 +72,12 @@ public class Storage {
         for (Task task : tasks) {
             String status = task.isDone() ? "1" : "0";
             if (task instanceof Deadline deadline) {
-                lines.add("D | " + status + " | " + deadline.description + " | " + deadline.getBy());
+                lines.add("D | " + status + " | " + deadline.getDescription() + " | " + deadline.getBy());
             } else if (task instanceof Event event) {
-                lines.add("E | " + status + " | " + event.description + " | "
+                lines.add("E | " + status + " | " + event.getDescription() + " | "
                     + event.getFrom() + " | " + event.getTo());
             } else {
-                lines.add("T | " + status + " | " + task.description);
+                lines.add("T | " + status + " | " + task.getDescription());
             }
         }
         Files.write(filePath, lines);

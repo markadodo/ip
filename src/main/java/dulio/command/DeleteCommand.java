@@ -1,4 +1,9 @@
+package dulio.command;
 import java.io.IOException;
+
+import dulio.task.Task;
+import dulio.task.Tasks;
+import dulio.ui.Ui;
 
 /** Deletes a task by its one-based list number. */
 public class DeleteCommand extends Command {

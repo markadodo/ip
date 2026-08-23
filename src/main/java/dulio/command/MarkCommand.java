@@ -1,4 +1,9 @@
+package dulio.command;
 import java.io.IOException;
+
+import dulio.task.Task;
+import dulio.task.Tasks;
+import dulio.ui.Ui;
 
 /** Marks a task as completed. */
 public class MarkCommand extends Command {
