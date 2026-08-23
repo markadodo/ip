@@ -9,7 +9,7 @@ Verify that todo, deadline, and event commands create the correct task types, pr
 
 ### Inputs
 1. `todo borrow book`
-2. `deadline return book /by Sunday`
+2. `deadline return book /by 2019-06-06`
 3. `event project meeting /from Mon 2pm /to 4pm`
 4. `list`
 5. `bye`
@@ -32,7 +32,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] return book (by: Sunday)
+  [D][ ] return book (by: Jun 06 2019)
    Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -43,12 +43,58 @@ ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][ ] borrow book
- 2.[D][ ] return book (by: Sunday)
+ 2.[D][ ] return book (by: Jun 06 2019)
  3.[E][ ] project meeting (from: Mon 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
  Bye. Hope to see you again soon!
 ____________________________________________________________
+```
+
+## Case: parse-and-format-deadline-date
+
+### Aim
+Verify that an ISO deadline date is parsed as a date, displayed in a readable format, saved in ISO format, and that invalid date input is rejected.
+
+### Inputs
+1. `deadline return book /by 2019-12-02`
+2. `list`
+3. `deadline late task /by 02/12/2019`
+4. `bye`
+
+### Expected output
+```text
+ ____  _   _ _     ___ ___
+|  _ \| | | | |   |_ _/ _ \
+| | | | | | | |    | | | | |
+| |_| | |_| | |___ | | |_| |
+|____/ \___/|_____|___\___/
+
+Hello! I'm Dulio.
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [D][ ] return book (by: Dec 02 2019)
+    Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[D][ ] return book (by: Dec 02 2019)
+____________________________________________________________
+____________________________________________________________
+ OOPS!!! Please enter dates in yyyy-MM-dd format.
+____________________________________________________________
+____________________________________________________________
+ Bye. Hope to see you again soon!
+____________________________________________________________
+```
+
+### Expected data file
+Path: `data/dulio.txt`
+
+```text
+D | 0 | return book | 2019-12-02
 ```
 
 ## Case: save-tasks-after-changes
@@ -58,7 +104,7 @@ Verify that adding a todo, deadline, and event automatically creates or updates 
 
 ### Inputs
 1. `todo read book`
-2. `deadline return book /by June 6th`
+2. `deadline return book /by 2019-06-06`
 3. `event project meeting /from Aug 6th 2pm /to 4pm`
 4. `mark 1`
 5. `bye`
@@ -81,7 +127,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] return book (by: June 6th)
+  [D][ ] return book (by: Jun 06 2019)
    Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -103,7 +149,7 @@ Path: `data/dulio.txt`
 
 ```text
 T | 1 | read book
-D | 0 | return book | June 6th
+D | 0 | return book | 2019-06-06
 E | 0 | project meeting | Aug 6th 2pm | 4pm
 ```
 
@@ -117,7 +163,7 @@ Path: `data/dulio.txt`
 
 ```text
 T | 1 | read book
-D | 0 | return book | June 6th
+D | 0 | return book | 2019-06-06
 E | 0 | project meeting | Aug 6th 2pm | 4pm
 ```
 
@@ -139,7 +185,7 @@ ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][X] read book
- 2.[D][ ] return book (by: June 6th)
+ 2.[D][ ] return book (by: Jun 06 2019)
  3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
 ____________________________________________________________
 ____________________________________________________________
@@ -186,7 +232,7 @@ Verify that deleting a task by its list number removes the correct typed task, s
 
 ### Inputs
 1. `todo read book`
-2. `deadline return book /by June 6th`
+2. `deadline return book /by 2019-06-06`
 3. `event project meeting /from Aug 6th 2pm /to 4pm`
 4. `todo join sports club`
 5. `todo borrow book`
@@ -216,7 +262,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-   [D][ ] return book (by: June 6th)
+   [D][ ] return book (by: Jun 06 2019)
    Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -240,7 +286,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
-   [D][X] return book (by: June 6th)
+   [D][X] return book (by: Jun 06 2019)
 ____________________________________________________________
 ____________________________________________________________
  Nice! I've marked this task as done:
@@ -249,7 +295,7 @@ ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][X] read book
- 2.[D][X] return book (by: June 6th)
+ 2.[D][X] return book (by: Jun 06 2019)
  3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
  4.[T][X] join sports club
  5.[T][ ] borrow book
@@ -262,7 +308,7 @@ ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
  1.[T][X] read book
- 2.[D][X] return book (by: June 6th)
+ 2.[D][X] return book (by: Jun 06 2019)
  3.[T][X] join sports club
  4.[T][ ] borrow book
 ____________________________________________________________
