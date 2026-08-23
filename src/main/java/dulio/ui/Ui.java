@@ -60,6 +60,16 @@ public class Ui {
         showSeparator();
     }
 
+    public void showFind(String matchingTasks) {
+        System.out.println(" Here are the matching tasks in your list:");
+        if (matchingTasks.isEmpty()) {
+            System.out.println(" (no matching tasks)");
+        } else {
+            System.out.print(matchingTasks);
+        }
+        showSeparator();
+    }
+
     public void showInvalidIndex() {
         System.out.println(" Invalid task index");
         showSeparator();
