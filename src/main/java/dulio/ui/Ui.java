@@ -1,4 +1,5 @@
 package dulio.ui;
+
 import java.util.Scanner;
 
 import dulio.task.Task;

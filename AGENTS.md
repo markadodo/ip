@@ -24,6 +24,10 @@ Unless the user says otherwise, assume that you are assisting a student working 
 
 # Project-specific requirements
 
+## Java coding standard
+
+All Java code in this project must follow the project-specific `seedu-java-coding-standard` skill (`/seedu-java-coding-standard`), based on the SE-EDU Java basic and intermediate conventions. This includes package layout, naming, four-space indentation, K&R braces, line length, explicit and consistently ordered imports, variable scope, defensive braces, whitespace, and Javadocs for public APIs.
+
 ## Post-code-change testing
 
 After every code update:
