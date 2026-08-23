@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Dulio {
     public static void main(String[] args) throws IOException {
@@ -12,9 +13,12 @@ public class Dulio {
         System.out.println("Hello! I'm Dulio.");
         System.out.println("What can I do for you?");
 
-        // in-memory storage for up to 100 tasks
         Tasks tasks = new Tasks();
-        java.util.Scanner sc = new java.util.Scanner(System.in);
+        runChat(tasks);
+    }
+
+    private static void runChat(Tasks tasks) throws IOException {
+        Scanner sc = new Scanner(System.in);
         System.out.println("____________________________________________________________");
         while (true) {
             if (!sc.hasNextLine()) {
