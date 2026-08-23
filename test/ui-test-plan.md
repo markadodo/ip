@@ -51,6 +51,102 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
+## Case: save-tasks-after-changes
+
+### Aim
+Verify that adding a todo, deadline, and event automatically creates or updates the relative data file with their types, statuses, descriptions, and date/time values.
+
+### Inputs
+1. `todo read book`
+2. `deadline return book /by June 6th`
+3. `event project meeting /from Aug 6th 2pm /to 4pm`
+4. `mark 1`
+5. `bye`
+
+### Expected output
+```text
+ ____  _   _ _     ___ ___
+|  _ \| | | | |   |_ _/ _ \
+| | | | | | | |    | | | | |
+| |_| | |_| | |___ | | |_| |
+|____/ \___/|_____|___\___/
+
+Hello! I'm Dulio.
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [T][ ] read book
+   Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [D][ ] return book (by: June 6th)
+   Now you have 2 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+   Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+   [T][X] read book
+____________________________________________________________
+____________________________________________________________
+ Bye. Hope to see you again soon!
+____________________________________________________________
+```
+
+### Expected data file
+Path: `data/dulio.txt`
+
+```text
+T | 1 | read book
+D | 0 | return book | June 6th
+E | 0 | project meeting | Aug 6th 2pm | 4pm
+```
+
+## Case: load-tasks-at-startup
+
+### Aim
+Verify that Dulio loads saved todo, deadline, and event tasks with their statuses and date/time values when it starts.
+
+### Initial data file
+Path: `data/dulio.txt`
+
+```text
+T | 1 | read book
+D | 0 | return book | June 6th
+E | 0 | project meeting | Aug 6th 2pm | 4pm
+```
+
+### Inputs
+1. `list`
+2. `bye`
+
+### Expected output
+```text
+ ____  _   _ _     ___ ___
+|  _ \| | | | |   |_ _/ _ \
+| | | | | | | |    | | | | |
+| |_| | |_| | |___ | | |_| |
+|____/ \___/|_____|___\___/
+
+Hello! I'm Dulio.
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[T][X] read book
+ 2.[D][ ] return book (by: June 6th)
+ 3.[E][ ] project meeting (from: Aug 6th 2pm to: 4pm)
+____________________________________________________________
+____________________________________________________________
+ Bye. Hope to see you again soon!
+____________________________________________________________
+```
+
 ## Case: reject-empty-and-unknown-commands
 
 ### Aim
