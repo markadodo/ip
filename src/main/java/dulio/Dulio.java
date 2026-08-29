@@ -6,6 +6,7 @@ import dulio.command.Command;
 import dulio.exception.DulioException;
 import dulio.parser.Parser;
 import dulio.task.Tasks;
+import dulio.GUI.GuiUi;
 import dulio.ui.Ui;
 
 /** Coordinates Dulio's user interface, parser, commands, and task list. */
@@ -51,6 +52,25 @@ public class Dulio {
             }
         }
         ui.close();
+    }
+
+    /**
+     * Processes one command and returns Dulio's response for a graphical interface.
+     *
+     * @param input the command to process
+     * @return Dulio's response text
+     */
+    public String getResponse(String input) {
+        GuiUi guiUi = new GuiUi();
+        try {
+            Command command = Parser.parseCommand(input);
+            command.execute(tasks, guiUi);
+        } catch (DulioException e) {
+            guiUi.showError(e.getMessage());
+        } catch (IOException e) {
+            guiUi.showError("Unable to save your task right now.");
+        }
+        return guiUi.getResponse();
     }
 
 }

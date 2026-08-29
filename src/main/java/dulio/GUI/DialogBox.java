@@ -1,11 +1,14 @@
 package dulio.GUI;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.Node;
 
 /** Displays a message alongside the image of its sender. */
 public class DialogBox extends HBox {
@@ -35,5 +38,39 @@ public class DialogBox extends HBox {
         setPadding(new Insets(6, 8, 6, 8));
         setMaxWidth(Double.MAX_VALUE);
         getChildren().addAll(text, displayPicture);
+    }
+
+    /**
+     * Flips this dialog box so that the image is on the left and text is on the right.
+     */
+    private void flip() {
+        setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
+        FXCollections.reverse(children);
+        getChildren().setAll(children);
+    }
+
+    /**
+     * Creates a right-aligned dialog box for a user message.
+     *
+     * @param message the user message to display
+     * @param image the user's image
+     * @return a dialog box for the user message
+     */
+    public static DialogBox getUserDialog(String message, Image image) {
+        return new DialogBox(message, image);
+    }
+
+    /**
+     * Creates a left-aligned dialog box for a Dulio message.
+     *
+     * @param message the Dulio message to display
+     * @param image Dulio's image
+     * @return a dialog box for the Dulio message
+     */
+    public static DialogBox getDulioDialog(String message, Image image) {
+        DialogBox dialogBox = new DialogBox(message, image);
+        dialogBox.flip();
+        return dialogBox;
     }
 }

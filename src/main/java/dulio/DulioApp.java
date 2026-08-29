@@ -29,6 +29,7 @@ public class DulioApp extends Application {
     private TextField userInput;
     private Image userImage;
     private Image dulioImage;
+    private Dulio dulio;
 
     /**
      * Creates and displays the initial Dulio window.
@@ -42,9 +43,7 @@ public class DulioApp extends Application {
 
         userImage = loadImage(USER_IMAGE_PATH);
         dulioImage = loadImage(DULIO_IMAGE_PATH);
-        dialogContainer.getChildren().addAll(
-            new DialogBox("Hello!", userImage),
-            new DialogBox("Hello! I'm Dulio. What can I do for you?", dulioImage));
+        dulio = new Dulio();
 
         ScrollPane scrollPane = new ScrollPane(dialogContainer);
         scrollPane.setPrefSize(385, 535);
@@ -53,16 +52,17 @@ public class DulioApp extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         userInput = new TextField();
         userInput.setPrefWidth(325.0);
         userInput.setPromptText("Type a command");
-        userInput.setOnAction(event -> sendMessage());
 
         Button sendButton = new Button("Send");
         sendButton.setPrefWidth(55.0);
         sendButton.setDefaultButton(true);
-        sendButton.setOnAction(event -> sendMessage());
+        sendButton.setOnAction(event -> handleUserInput());
+        userInput.setOnAction(event -> handleUserInput());
 
         HBox inputBar = new HBox(8, userInput, sendButton);
         inputBar.setAlignment(Pos.CENTER);
@@ -84,19 +84,19 @@ public class DulioApp extends Application {
         stage.show();
     }
 
-    private void sendMessage() {
+    private Image loadImage(String path) {
+        return new Image(getClass().getResourceAsStream(path));
+    }
+
+    private void handleUserInput() {
         String message = userInput.getText().trim();
         if (message.isEmpty()) {
             return;
         }
 
         dialogContainer.getChildren().addAll(
-            new DialogBox(message, userImage),
-            new DialogBox("I received your command.", dulioImage));
+            DialogBox.getUserDialog(message, userImage),
+            DialogBox.getDulioDialog(dulio.getResponse(message), dulioImage));
         userInput.clear();
-    }
-
-    private Image loadImage(String path) {
-        return new Image(getClass().getResourceAsStream(path));
     }
 }
