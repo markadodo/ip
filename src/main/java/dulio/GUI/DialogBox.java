@@ -1,0 +1,77 @@
+package dulio.GUI;
+
+import java.io.IOException;
+import java.util.Collections;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+
+/** Displays a message alongside the image of its sender. */
+public class DialogBox extends HBox {
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
+
+    /**
+     * Creates a dialog box containing a message and sender image.
+     *
+     * @param message the message to display
+     * @param image the sender image to display
+     */
+    private DialogBox(String message, Image image) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to load DialogBox.fxml", e);
+        }
+
+        dialog.setText(message);
+        displayPicture.setImage(image);
+    }
+
+    /**
+     * Flips this dialog box so that the image is on the left and text is on the right.
+     */
+    private void flip() {
+        ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
+        Collections.reverse(children);
+        getChildren().setAll(children);
+        setAlignment(Pos.TOP_LEFT);
+    }
+
+    /**
+     * Creates a right-aligned dialog box for a user message.
+     *
+     * @param message the user message to display
+     * @param image the user's image
+     * @return a dialog box for the user message
+     */
+    public static DialogBox getUserDialog(String message, Image image) {
+        return new DialogBox(message, image);
+    }
+
+    /**
+     * Creates a left-aligned dialog box for a Dulio message.
+     *
+     * @param message the Dulio message to display
+     * @param image Dulio's image
+     * @return a dialog box for the Dulio message
+     */
+    public static DialogBox getDulioDialog(String message, Image image) {
+        DialogBox dialogBox = new DialogBox(message, image);
+        dialogBox.flip();
+        return dialogBox;
+    }
+}
