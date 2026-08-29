@@ -1,19 +1,25 @@
 package dulio.GUI;
 
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.Node;
 
 /** Displays a message alongside the image of its sender. */
 public class DialogBox extends HBox {
-    private static final double IMAGE_SIZE = 100.0;
-    private static final double MESSAGE_MAX_WIDTH = 240.0;
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
 
     /**
      * Creates a dialog box containing a message and sender image.
@@ -21,33 +27,28 @@ public class DialogBox extends HBox {
      * @param message the message to display
      * @param image the sender image to display
      */
-    public DialogBox(String message, Image image) {
-        Label text = new Label(message);
-        text.setWrapText(true);
-        text.setMaxWidth(MESSAGE_MAX_WIDTH);
-        text.setStyle("-fx-background-color: #e8eef5; -fx-background-radius: 12;"
-            + " -fx-padding: 10 14 10 14;");
+    private DialogBox(String message, Image image) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to load DialogBox.fxml", e);
+        }
 
-        ImageView displayPicture = new ImageView(image);
-        displayPicture.setFitWidth(IMAGE_SIZE);
-        displayPicture.setFitHeight(IMAGE_SIZE);
-        displayPicture.setPreserveRatio(true);
-
-        setSpacing(12);
-        setAlignment(Pos.TOP_RIGHT);
-        setPadding(new Insets(6, 8, 6, 8));
-        setMaxWidth(Double.MAX_VALUE);
-        getChildren().addAll(text, displayPicture);
+        dialog.setText(message);
+        displayPicture.setImage(image);
     }
 
     /**
      * Flips this dialog box so that the image is on the left and text is on the right.
      */
     private void flip() {
-        setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
-        FXCollections.reverse(children);
+        Collections.reverse(children);
         getChildren().setAll(children);
+        setAlignment(Pos.TOP_LEFT);
     }
 
     /**
