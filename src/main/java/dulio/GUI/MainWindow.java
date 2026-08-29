@@ -58,5 +58,9 @@ public class MainWindow extends AnchorPane {
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDulioDialog(response, dulioImage));
         userInput.clear();
+
+        if ("bye".equals(input)) {
+            userInput.getScene().getWindow().hide();
+        }
     }
 }
