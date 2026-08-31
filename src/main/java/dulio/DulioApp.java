@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import dulio.GUI.MainWindow;
+import dulio.gui.MainWindow;
 
 /**
  * Displays the initial Dulio JavaFX window.

@@ -6,7 +6,7 @@ import dulio.command.Command;
 import dulio.exception.DulioException;
 import dulio.parser.Parser;
 import dulio.task.Tasks;
-import dulio.GUI.GuiUi;
+import dulio.gui.GuiUi;
 import dulio.ui.Ui;
 
 /** Coordinates Dulio's user interface, parser, commands, and task list. */

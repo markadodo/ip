@@ -1,4 +1,4 @@
-package dulio.GUI;
+package dulio.gui;
 
 import dulio.task.Task;
 import dulio.ui.Ui;

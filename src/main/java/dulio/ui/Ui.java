@@ -57,7 +57,8 @@ public class Ui {
         showSeparator();
     }
 
-    /** Displays the current task list.
+    /**
+     * Displays the current task list.
      * @param listed the preformatted task list
      */
     public void showList(String listed) {
@@ -86,7 +87,8 @@ public class Ui {
         showSeparator();
     }
 
-    /** Displays confirmation after adding a task.
+    /**
+     * Displays confirmation after adding a task.
      * @param task the added task
      * @param taskCount the resulting task count
      */
@@ -97,7 +99,8 @@ public class Ui {
         showSeparator();
     }
 
-    /** Displays confirmation after deleting a task.
+    /**
+     * Displays confirmation after deleting a task.
      * @param task the deleted task
      * @param taskCount the resulting task count
      */
@@ -108,7 +111,8 @@ public class Ui {
         showSeparator();
     }
 
-    /** Displays confirmation after changing a task's completion state.
+    /**
+     * Displays confirmation after changing a task's completion state.
      * @param task the updated task
      * @param marked whether the task was marked or unmarked
      */
@@ -120,7 +124,8 @@ public class Ui {
         showSeparator();
     }
 
-    /** Displays a user-facing error message.
+    /**
+     * Displays a user-facing error message.
      * @param message the error message
      */
     public void showError(String message) {
