@@ -58,6 +58,12 @@ public class Tasks {
         return formatTasks(tasks);
     }
 
+    /**
+     * Finds and formats all tasks matching a keyword (case-insensitive).
+     *
+     * @param keyword the search keyword
+     * @return the formatted matching tasks
+     */
     public String find(String keyword) {
         String normalizedKeyword = keyword.toLowerCase(Locale.ENGLISH);
         ArrayList<Task> matchingTasks = new ArrayList<>();

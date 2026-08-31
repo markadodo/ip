@@ -11,14 +11,18 @@ public class MarkCommand extends Command {
     /** One-based number of the task to mark. */
     private int taskNumber;
 
-    /** Creates a mark command.
+    /**
+     * Creates a mark command.
+     *
      * @param taskNumber the one-based task number
      */
     public MarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
-    /** Marks the task as completed and reports the result.
+    /**
+     * Marks the task as completed and reports the result.
+     *
      * @param tasks the task list to modify
      * @param ui the interface used for the response
      * @throws IOException if persistence fails

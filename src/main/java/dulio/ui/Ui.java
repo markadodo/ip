@@ -71,6 +71,10 @@ public class Ui {
         showSeparator();
     }
 
+    /**
+     * Displays the matching tasks from a find search.
+     * @param matchingTasks the preformatted matching tasks
+     */
     public void showFind(String matchingTasks) {
         System.out.println(" Here are the matching tasks in your list:");
         if (matchingTasks.isEmpty()) {

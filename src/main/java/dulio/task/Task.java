@@ -64,7 +64,11 @@ public class Task {
     }
 
     @Override
-    /** Returns the task description for display. */
+    /**
+     * Returns the task description for display.
+     *
+     * @return the task description
+     */
     public String toString() {
         return description;
     }

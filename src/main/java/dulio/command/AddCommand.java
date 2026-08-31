@@ -11,14 +11,18 @@ public class AddCommand extends Command {
     /** The task to add. */
     private Task task;
 
-    /** Creates an add command for the supplied task.
+    /**
+     * Creates an add command for the supplied task.
+     *
      * @param task the task to add
      */
     public AddCommand(Task task) {
         this.task = task;
     }
 
-    /** Adds the task and reports the updated count.
+    /**
+     * Adds the task and reports the updated count.
+     *
      * @param tasks the task list to modify
      * @param ui the interface used for the response
      * @throws IOException if persistence fails

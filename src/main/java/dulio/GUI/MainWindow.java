@@ -27,7 +27,9 @@ public class MainWindow extends AnchorPane {
     private final Image dulioImage = new Image(getClass().getResourceAsStream(DULIO_IMAGE_PATH));
     private Dulio dulio;
 
-    /** Configures scrolling and displays the initial sample messages. */
+    /**
+     * Configures scrolling and displays the initial sample messages.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

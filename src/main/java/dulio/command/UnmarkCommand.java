@@ -11,14 +11,18 @@ public class UnmarkCommand extends Command {
     /** One-based number of the task to unmark. */
     private int taskNumber;
 
-    /** Creates an unmark command.
+    /**
+     * Creates an unmark command.
+     *
      * @param taskNumber the one-based task number
      */
     public UnmarkCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
 
-    /** Marks the task as incomplete and reports the result.
+    /**
+     * Marks the task as incomplete and reports the result.
+     *
      * @param tasks the task list to modify
      * @param ui the interface used for the response
      * @throws IOException if persistence fails
