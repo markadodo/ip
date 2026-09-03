@@ -19,7 +19,7 @@ public class DulioApp extends Application {
     /**
      * Creates and displays the initial Dulio window.
      *
-     * @param stage the primary stage for the application
+     * @param stage the primary stage for the application.
      */
     @Override
     public void start(Stage stage) {

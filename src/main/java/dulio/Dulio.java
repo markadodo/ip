@@ -9,13 +9,15 @@ import dulio.task.Tasks;
 import dulio.gui.GuiUi;
 import dulio.ui.Ui;
 
-/** Coordinates Dulio's user interface, parser, commands, and task list. */
+/**
+ * Coordinates Dulio's user interface, parser, commands, and task list.
+ */
 public class Dulio {
     /**
      * Starts a Dulio session.
      *
-     * @param args command-line arguments, which are not used
-     * @throws IOException if task data cannot be saved
+     * @param args Command-line arguments, which are not used.
+     * @throws IOException If task data cannot be saved.
      */
     public static void main(String[] args) throws IOException {
         new Dulio().run();
@@ -24,7 +26,9 @@ public class Dulio {
     private Ui ui;
     private Tasks tasks;
 
-    /** Creates a Dulio application with its default UI and task list. */
+    /**
+     * Creates a Dulio application with its default UI and task list.
+     */
     public Dulio() {
         ui = new Ui();
         tasks = new Tasks();
@@ -33,7 +37,7 @@ public class Dulio {
     /**
      * Runs the command-processing loop until the user exits or input ends.
      *
-     * @throws IOException if task data cannot be saved
+     * @throws IOException If task data cannot be saved.
      */
     public void run() throws IOException {
         ui.showWelcome();
@@ -55,10 +59,10 @@ public class Dulio {
     }
 
     /**
-     * Processes one command and returns Dulio's response for a graphical interface.
+     * Returns Dulio's response after processing one command for a graphical interface.
      *
-     * @param input the command to process
-     * @return Dulio's response text
+     * @param input The command to process.
+     * @return Dulio's response text.
      */
     public String getResponse(String input) {
         GuiUi guiUi = new GuiUi();

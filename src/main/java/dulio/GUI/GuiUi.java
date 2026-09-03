@@ -3,20 +3,19 @@ package dulio.gui;
 import dulio.task.Task;
 import dulio.ui.Ui;
 
-/** Collects Dulio responses for display in the JavaFX interface. */
+/**
+ * Collects Dulio responses for display in the JavaFX interface.
+ */
 public class GuiUi extends Ui {
     private StringBuilder response;
 
-    /** Creates an empty GUI response collector. */
+    /**
+     * Creates an empty GUI response collector.
+     */
     public GuiUi() {
         response = new StringBuilder();
     }
 
-    /**
-     * Returns all text generated since this collector was created.
-     *
-     * @return the collected response text
-     */
     public String getResponse() {
         return response.toString();
     }

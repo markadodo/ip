@@ -21,7 +21,6 @@ import dulio.task.Event;
 import dulio.task.Task;
 import dulio.task.Todo;
 
-/** Tests command and date parsing behavior. */
 public class ParserTest {
     @Test
     public void parseDate_validIsoDate_returnsLocalDate() throws DulioException {

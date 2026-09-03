@@ -7,14 +7,22 @@ import java.util.Locale;
 
 import dulio.storage.Storage;
 
-/** Manages the task collection and persists changes through Storage. */
+/**
+ * Manages the task collection and persists changes through Storage.
+ */
 public class Tasks {
-    /** Tasks in their current display order. */
+    /**
+     * Tasks in their current display order.
+     */
     private ArrayList<Task> tasks;
-    /** Persistence service used for loading and saving tasks. */
+    /**
+     * Persistence service used for loading and saving tasks.
+     */
     private Storage storage;
 
-    /** Creates a task list backed by the default data file. */
+    /**
+     * Creates a task list backed by the default data file.
+     */
     public Tasks() {
         this(new Storage(Path.of("data", "dulio.txt")));
     }
@@ -22,7 +30,7 @@ public class Tasks {
     /**
      * Creates a task list using the supplied persistence service.
      *
-     * @param storage the persistence service to use
+     * @param storage The persistence service to use.
      */
     public Tasks(Storage storage) {
         this.storage = storage;
@@ -32,8 +40,8 @@ public class Tasks {
     /**
      * Adds and persists a task.
      *
-     * @param task the task to add
-     * @throws IOException if the task list cannot be saved
+     * @param task The task to add.
+     * @throws IOException If the task list cannot be saved.
      */
     public void store(Task task) throws IOException {
         tasks.add(task);
@@ -43,26 +51,26 @@ public class Tasks {
     /**
      * Returns the number of tasks.
      *
-     * @return the number of tasks
+     * @return The number of tasks.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Formats all tasks as numbered display lines.
+     * Returns all tasks as numbered display lines.
      *
-     * @return the formatted task list
+     * @return The formatted task list.
      */
     public String list() {
         return formatTasks(tasks);
     }
 
     /**
-     * Finds and formats all tasks matching a keyword (case-insensitive).
+     * Returns all tasks matching a keyword as numbered display lines (case-insensitive).
      *
-     * @param keyword the search keyword
-     * @return the formatted matching tasks
+     * @param keyword The search keyword.
+     * @return The formatted matching tasks.
      */
     public String find(String keyword) {
         String normalizedKeyword = keyword.toLowerCase(Locale.ENGLISH);
@@ -98,9 +106,9 @@ public class Tasks {
     /**
      * Marks a numbered task as completed and persists the change.
      *
-     * @param taskNumber the one-based task number
-     * @return the marked task, or null if the number is invalid
-     * @throws IOException if the task list cannot be saved
+     * @param taskNumber The one-based task number.
+     * @return The marked task, or null if the number is invalid.
+     * @throws IOException If the task list cannot be saved.
      */
     public Task mark(int taskNumber) throws IOException {
         int idx = taskNumber - 1;
@@ -115,9 +123,9 @@ public class Tasks {
     /**
      * Marks a numbered task as incomplete and persists the change.
      *
-     * @param taskNumber the one-based task number
-     * @return the unmarked task, or null if the number is invalid
-     * @throws IOException if the task list cannot be saved
+     * @param taskNumber The one-based task number.
+     * @return The unmarked task, or null if the number is invalid.
+     * @throws IOException If the task list cannot be saved.
      */
     public Task unmark(int taskNumber) throws IOException {
         int idx = taskNumber - 1;
@@ -132,9 +140,9 @@ public class Tasks {
     /**
      * Deletes and returns a numbered task, or null for an invalid number.
      *
-     * @param taskNumber the one-based task number
-     * @return the deleted task, or null if the number is invalid
-     * @throws IOException if the task list cannot be saved
+     * @param taskNumber The one-based task number.
+     * @return The deleted task, or null if the number is invalid.
+     * @throws IOException If the task list cannot be saved.
      */
     public Task delete(int taskNumber) throws IOException {
         int idx = taskNumber - 1;

@@ -17,18 +17,20 @@ import dulio.task.Event;
 import dulio.task.Task;
 import dulio.task.Todo;
 
-/** Parses Dulio commands and date values. */
+/**
+ * Parses Dulio commands and date values.
+ */
 public class Parser {
-    
+
     private Parser() {
     }
 
     /**
-     * Converts an ISO date string into a date.
+     * Returns the date represented by an ISO date string.
      *
-     * @param date the date in yyyy-MM-dd format
-     * @return the parsed date
-     * @throws DulioException if the date is not valid
+     * @param date The date in yyyy-MM-dd format.
+     * @return The parsed date.
+     * @throws DulioException If the date is not valid.
      */
     public static LocalDate parseDate(String date) throws DulioException {
         try {
@@ -39,11 +41,11 @@ public class Parser {
     }
 
     /**
-     * Converts a console command into a task.
+     * Returns the task represented by a console command.
      *
-     * @param line the console command
-     * @return the parsed task
-     * @throws DulioException if the command is invalid
+     * @param line The console command.
+     * @return The parsed task.
+     * @throws DulioException If the command is invalid.
      */
     public static Task parseTask(String line) throws DulioException {
         if (line.equals("todo") || line.startsWith("todo ")) {
@@ -83,11 +85,11 @@ public class Parser {
     }
 
     /**
-     * Converts a complete console line into an executable command.
+     * Returns the executable command represented by a complete console line.
      *
-     * @param line the complete console command
-     * @return the corresponding command object
-     * @throws DulioException if the command or its arguments are invalid
+     * @param line The complete console command.
+     * @return The corresponding command object.
+     * @throws DulioException If the command or its arguments are invalid.
      */
     public static Command parseCommand(String line) throws DulioException {
         if ("bye".equals(line)) {

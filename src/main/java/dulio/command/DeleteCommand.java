@@ -6,15 +6,19 @@ import dulio.task.Task;
 import dulio.task.Tasks;
 import dulio.ui.Ui;
 
-/** Deletes a task by its one-based list number. */
+/**
+ * Deletes a task by its one-based list number.
+ */
 public class DeleteCommand extends Command {
-    /** One-based number of the task to delete. */
+    /**
+     * One-based number of the task to delete.
+     */
     private int taskNumber;
 
     /**
      * Creates a delete command.
      *
-     * @param taskNumber the one-based task number
+     * @param taskNumber The one-based task number.
      */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
@@ -23,9 +27,9 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task and reports the result.
      *
-     * @param tasks the task list to modify
-     * @param ui the interface used for the response
-     * @throws IOException if persistence fails
+     * @param tasks The task list to modify.
+     * @param ui The interface used for the response.
+     * @throws IOException If persistence fails.
      */
     @Override
     public void execute(Tasks tasks, Ui ui) throws IOException {

@@ -14,7 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-/** Displays a message alongside the image of its sender. */
+/**
+ * Displays a message alongside the image of its sender.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -24,8 +26,8 @@ public class DialogBox extends HBox {
     /**
      * Creates a dialog box containing a message and sender image.
      *
-     * @param message the message to display
-     * @param image the sender image to display
+     * @param message The message to display.
+     * @param image The sender image to display.
      */
     private DialogBox(String message, Image image) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
@@ -52,22 +54,22 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Creates a right-aligned dialog box for a user message.
+     * Returns a right-aligned dialog box for a user message.
      *
-     * @param message the user message to display
-     * @param image the user's image
-     * @return a dialog box for the user message
+     * @param message The user message to display.
+     * @param image The user's image.
+     * @return A dialog box for the user message.
      */
     public static DialogBox getUserDialog(String message, Image image) {
         return new DialogBox(message, image);
     }
 
     /**
-     * Creates a left-aligned dialog box for a Dulio message.
+     * Returns a left-aligned dialog box for a Dulio message.
      *
-     * @param message the Dulio message to display
-     * @param image Dulio's image
-     * @return a dialog box for the Dulio message
+     * @param message The Dulio message to display.
+     * @param image Dulio's image.
+     * @return A dialog box for the Dulio message.
      */
     public static DialogBox getDulioDialog(String message, Image image) {
         DialogBox dialogBox = new DialogBox(message, image);

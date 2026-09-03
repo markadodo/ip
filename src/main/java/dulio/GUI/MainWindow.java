@@ -9,7 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-/** Controller for the main Dulio GUI. */
+/**
+ * Controller for the main Dulio GUI.
+ */
 public class MainWindow extends AnchorPane {
     private static final String USER_IMAGE_PATH = "/images/account-avatar-profile-user-svgrepo-com.png";
     private static final String DULIO_IMAGE_PATH = "/images/account-avatar-profile-user-3-svgrepo-com.png";
@@ -38,16 +40,13 @@ public class MainWindow extends AnchorPane {
             DialogBox.getDulioDialog("Hello! I'm Dulio. What can I do for you?", dulioImage));
     }
 
-    /**
-     * Injects the Dulio instance used to process commands.
-     *
-     * @param dulio the Dulio backend
-     */
     public void setDulio(Dulio dulio) {
         this.dulio = dulio;
     }
 
-    /** Processes the command entered by the user and displays the response. */
+    /**
+     * Processes the command entered by the user and displays the response.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().trim();

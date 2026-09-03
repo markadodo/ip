@@ -4,17 +4,25 @@ import java.util.Scanner;
 
 import dulio.task.Task;
 
-/** Handles Dulio's interaction with the console user. */
+/**
+ * Handles Dulio's interaction with the console user.
+ */
 public class Ui {
-    /** Reads commands from standard input. */
+    /**
+     * Reads commands from standard input.
+     */
     private Scanner scanner;
 
-    /** Creates a console UI that reads from standard input. */
+    /**
+     * Creates a console UI that reads from standard input.
+     */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
-    /** Displays the startup greeting and command separator. */
+    /**
+     * Displays the startup greeting and command separator.
+     */
     public void showWelcome() {
         System.out.println("____________________________________________________________");
         System.out.println(" ____  _   _ _     ___ ___  \n"
@@ -30,7 +38,7 @@ public class Ui {
     /**
      * Reads the next command, or returns null when input ends.
      *
-     * @return the next command, or null at end of input
+     * @return The next command, or null at end of input.
      */
     public String readCommand() {
         if (!scanner.hasNextLine()) {
@@ -41,17 +49,23 @@ public class Ui {
         return command;
     }
 
-    /** Displays a separator line. */
+    /**
+     * Displays a separator line.
+     */
     public void showSeparator() {
         System.out.println("____________________________________________________________");
     }
 
-    /** Closes the console input. */
+    /**
+     * Closes the console input.
+     */
     public void close() {
         scanner.close();
     }
 
-    /** Displays the goodbye message and a separator. */
+    /**
+     * Displays the goodbye message and a separator.
+     */
     public void showGoodbye() {
         System.out.println(" Bye. Hope to see you again soon!");
         showSeparator();
@@ -59,7 +73,8 @@ public class Ui {
 
     /**
      * Displays the current task list.
-     * @param listed the preformatted task list
+     *
+     * @param listed The preformatted task list.
      */
     public void showList(String listed) {
         System.out.println(" Here are the tasks in your list:");
@@ -73,7 +88,8 @@ public class Ui {
 
     /**
      * Displays the matching tasks from a find search.
-     * @param matchingTasks the preformatted matching tasks
+     *
+     * @param matchingTasks The preformatted matching tasks.
      */
     public void showFind(String matchingTasks) {
         System.out.println(" Here are the matching tasks in your list:");
@@ -85,7 +101,9 @@ public class Ui {
         showSeparator();
     }
 
-    /** Displays the error for an invalid task number. */
+    /**
+     * Displays the error for an invalid task number.
+     */
     public void showInvalidIndex() {
         System.out.println(" Invalid task index");
         showSeparator();
@@ -93,8 +111,9 @@ public class Ui {
 
     /**
      * Displays confirmation after adding a task.
-     * @param task the added task
-     * @param taskCount the resulting task count
+     *
+     * @param task The added task.
+     * @param taskCount The resulting task count.
      */
     public void showAdded(Task task, int taskCount) {
         System.out.println(" Got it. I've added this task:");
@@ -105,8 +124,9 @@ public class Ui {
 
     /**
      * Displays confirmation after deleting a task.
-     * @param task the deleted task
-     * @param taskCount the resulting task count
+     *
+     * @param task The deleted task.
+     * @param taskCount The resulting task count.
      */
     public void showDeleted(Task task, int taskCount) {
         System.out.println(" Noted. I've removed this task:");
@@ -117,8 +137,9 @@ public class Ui {
 
     /**
      * Displays confirmation after changing a task's completion state.
-     * @param task the updated task
-     * @param marked whether the task was marked or unmarked
+     *
+     * @param task The updated task.
+     * @param marked Whether the task was marked or unmarked.
      */
     public void showMarked(Task task, boolean marked) {
         System.out.println(marked
@@ -130,7 +151,8 @@ public class Ui {
 
     /**
      * Displays a user-facing error message.
-     * @param message the error message
+     *
+     * @param message The error message.
      */
     public void showError(String message) {
         System.out.println(" " + message);

@@ -8,35 +8,27 @@ import java.util.Locale;
  * A task that must be completed by a specified date or time.
  */
 public class Deadline extends Task {
-    /** The date or time by which the task should be completed. */
+    /**
+     * The date or time by which the task should be completed.
+     */
     private LocalDate by;
 
     /**
      * Creates a deadline task.
      *
-     * @param description the task description
-     * @param by the date by which the task should be completed
+     * @param description The task description.
+     * @param by The date by which the task should be completed.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
 
-    /**
-     * Returns the display icon for a deadline.
-     *
-     * @return the deadline icon
-     */
     @Override
     public String getTypeIcon() {
         return "D";
     }
 
-    /**
-     * Returns the deadline date.
-     *
-     * @return the deadline date
-     */
     public LocalDate getBy() {
         return by;
     }
@@ -44,7 +36,7 @@ public class Deadline extends Task {
     /**
      * Returns the task description together with its deadline.
      *
-     * @return the formatted deadline
+     * @return The formatted deadline.
      */
     @Override
     public String toString() {

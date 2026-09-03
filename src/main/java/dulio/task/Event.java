@@ -4,17 +4,21 @@ package dulio.task;
  * A task that occurs between a specified start and end date or time.
  */
 public class Event extends Task {
-    /** The date or time when the event starts. */
+    /**
+     * The date or time when the event starts.
+     */
     private String from;
-    /** The date or time when the event ends. */
+    /**
+     * The date or time when the event ends.
+     */
     private String to;
 
     /**
      * Creates an event task.
      *
-     * @param description the event description
-     * @param from the date or time when the event starts
-     * @param to the date or time when the event ends
+     * @param description The event description.
+     * @param from The date or time when the event starts.
+     * @param to The date or time when the event ends.
      */
     public Event(String description, String from, String to) {
         super(description);
@@ -22,30 +26,15 @@ public class Event extends Task {
         this.to = to;
     }
 
-    /**
-     * Returns the display icon for an event.
-     *
-     * @return the event icon
-     */
     @Override
     public String getTypeIcon() {
         return "E";
     }
 
-    /**
-     * Returns the event start value.
-     *
-     * @return the event start value
-     */
     public String getFrom() {
         return from;
     }
 
-    /**
-     * Returns the event end value.
-     *
-     * @return the event end value
-     */
     public String getTo() {
         return to;
     }
@@ -53,7 +42,7 @@ public class Event extends Task {
     /**
      * Returns the event description together with its start and end times.
      *
-     * @return the formatted event
+     * @return The formatted event.
      */
     @Override
     public String toString() {

@@ -5,7 +5,9 @@ import java.io.IOException;
 import dulio.task.Tasks;
 import dulio.ui.Ui;
 
-/** Ends the Dulio session. */
+/**
+ * Ends the Dulio session.
+ */
 public class ExitCommand extends Command {
     /**
      * Creates an exit command.
@@ -16,9 +18,9 @@ public class ExitCommand extends Command {
     /**
      * Displays the goodbye message.
      *
-     * @param tasks unused task list
-     * @param ui the interface used for the response
-     * @throws IOException if persistence fails
+     * @param tasks Unused task list.
+     * @param ui The interface used for the response.
+     * @throws IOException If persistence fails.
      */
     @Override
     public void execute(Tasks tasks, Ui ui) throws IOException {
@@ -28,7 +30,7 @@ public class ExitCommand extends Command {
     /**
      * Returns true because this command ends the session.
      *
-     * @return true if this command exits
+     * @return True if this command exits.
      */
     @Override
     public boolean isExit() {
