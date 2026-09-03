@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import dulio.command.Command;
 import dulio.exception.DulioException;
+import dulio.gui.GuiUi;
 import dulio.parser.Parser;
 import dulio.task.Tasks;
-import dulio.gui.GuiUi;
 import dulio.ui.Ui;
 
 /**
