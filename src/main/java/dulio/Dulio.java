@@ -6,7 +6,7 @@ import dulio.command.Command;
 import dulio.exception.DulioException;
 import dulio.gui.GuiUi;
 import dulio.parser.Parser;
-import dulio.task.Tasks;
+import dulio.task.TaskList;
 import dulio.ui.Ui;
 
 /**
@@ -24,14 +24,14 @@ public class Dulio {
     }
 
     private Ui ui;
-    private Tasks tasks;
+    private TaskList tasks;
 
     /**
      * Creates a Dulio application with its default UI and task list.
      */
     public Dulio() {
         ui = new Ui();
-        tasks = new Tasks();
+        tasks = new TaskList();
     }
 
     /**

@@ -2,7 +2,7 @@ package dulio.command;
 
 import java.io.IOException;
 
-import dulio.task.Tasks;
+import dulio.task.TaskList;
 import dulio.ui.Ui;
 
 /**
@@ -23,7 +23,7 @@ public class ExitCommand extends Command {
      * @throws IOException If persistence fails.
      */
     @Override
-    public void execute(Tasks tasks, Ui ui) throws IOException {
+    public void execute(TaskList tasks, Ui ui) throws IOException {
         ui.showGoodbye();
     }
 

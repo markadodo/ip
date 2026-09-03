@@ -3,7 +3,7 @@ package dulio.command;
 import java.io.IOException;
 
 import dulio.task.Task;
-import dulio.task.Tasks;
+import dulio.task.TaskList;
 import dulio.ui.Ui;
 
 /**
@@ -32,7 +32,7 @@ public class UnmarkCommand extends Command {
      * @throws IOException If persistence fails.
      */
     @Override
-    public void execute(Tasks tasks, Ui ui) throws IOException {
+    public void execute(TaskList tasks, Ui ui) throws IOException {
         Task task = tasks.unmark(taskNumber);
         if (task == null) {
             ui.showInvalidIndex();

@@ -10,7 +10,7 @@ import dulio.storage.Storage;
 /**
  * Manages the task collection and persists changes through Storage.
  */
-public class Tasks {
+public class TaskList {
     /**
      * Tasks in their current display order.
      */
@@ -23,7 +23,7 @@ public class Tasks {
     /**
      * Creates a task list backed by the default data file.
      */
-    public Tasks() {
+    public TaskList() {
         this(new Storage(Path.of("data", "dulio.txt")));
     }
 
@@ -32,7 +32,7 @@ public class Tasks {
      *
      * @param storage The persistence service to use.
      */
-    public Tasks(Storage storage) {
+    public TaskList(Storage storage) {
         this.storage = storage;
         tasks = storage.load();
     }

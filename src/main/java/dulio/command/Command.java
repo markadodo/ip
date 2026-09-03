@@ -2,7 +2,7 @@ package dulio.command;
 
 import java.io.IOException;
 
-import dulio.task.Tasks;
+import dulio.task.TaskList;
 import dulio.ui.Ui;
 
 /**
@@ -22,7 +22,7 @@ public abstract class Command {
      * @param ui The interface used for responses.
      * @throws IOException If persistence fails.
      */
-    public abstract void execute(Tasks tasks, Ui ui) throws IOException;
+    public abstract void execute(TaskList tasks, Ui ui) throws IOException;
 
     /**
      * Returns whether this command ends the application.
