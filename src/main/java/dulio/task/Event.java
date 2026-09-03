@@ -4,13 +4,7 @@ package dulio.task;
  * A task that occurs between a specified start and end date or time.
  */
 public class Event extends Task {
-    /**
-     * The date or time when the event starts.
-     */
     private String from;
-    /**
-     * The date or time when the event ends.
-     */
     private String to;
 
     /**

@@ -11,13 +11,7 @@ import dulio.storage.Storage;
  * Manages the task collection and persists changes through Storage.
  */
 public class TaskList {
-    /**
-     * Tasks in their current display order.
-     */
     private ArrayList<Task> tasks;
-    /**
-     * Persistence service used for loading and saving tasks.
-     */
     private Storage storage;
 
     /**

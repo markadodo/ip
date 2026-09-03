@@ -10,9 +10,6 @@ import dulio.ui.Ui;
  * Deletes a task by its one-based list number.
  */
 public class DeleteCommand extends Command {
-    /**
-     * One-based number of the task to delete.
-     */
     private int taskNumber;
 
     /**

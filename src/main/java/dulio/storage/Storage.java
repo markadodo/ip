@@ -17,9 +17,6 @@ import dulio.task.Todo;
  * Handles loading tasks from and saving tasks to the data file.
  */
 public class Storage {
-    /**
-     * File used to persist task records.
-     */
     private Path filePath;
 
     /**

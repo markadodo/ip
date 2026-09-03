@@ -8,9 +8,6 @@ import dulio.task.Task;
  * Handles Dulio's interaction with the console user.
  */
 public class Ui {
-    /**
-     * Reads commands from standard input.
-     */
     private Scanner scanner;
 
     /**

@@ -44,9 +44,6 @@ public class MainWindow extends AnchorPane {
         this.dulio = dulio;
     }
 
-    /**
-     * Processes the command entered by the user and displays the response.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText().trim();

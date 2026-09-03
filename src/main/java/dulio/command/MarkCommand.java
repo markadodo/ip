@@ -10,9 +10,6 @@ import dulio.ui.Ui;
  * Marks a task as completed.
  */
 public class MarkCommand extends Command {
-    /**
-     * One-based number of the task to mark.
-     */
     private int taskNumber;
 
     /**

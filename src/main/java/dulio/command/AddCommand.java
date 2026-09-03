@@ -10,9 +10,6 @@ import dulio.ui.Ui;
  * Adds a parsed task to the task list.
  */
 public class AddCommand extends Command {
-    /**
-     * The task to add.
-     */
     private Task task;
 
     /**

@@ -8,9 +8,6 @@ import java.util.Locale;
  * A task that must be completed by a specified date or time.
  */
 public class Deadline extends Task {
-    /**
-     * The date or time by which the task should be completed.
-     */
     private LocalDate by;
 
     /**

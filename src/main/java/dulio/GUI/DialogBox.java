@@ -23,12 +23,6 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
-    /**
-     * Creates a dialog box containing a message and sender image.
-     *
-     * @param message The message to display.
-     * @param image The sender image to display.
-     */
     private DialogBox(String message, Image image) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
         fxmlLoader.setRoot(this);
@@ -43,9 +37,6 @@ public class DialogBox extends HBox {
         displayPicture.setImage(image);
     }
 
-    /**
-     * Flips this dialog box so that the image is on the left and text is on the right.
-     */
     private void flip() {
         ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
         Collections.reverse(children);

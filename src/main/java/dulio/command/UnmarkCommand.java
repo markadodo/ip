@@ -10,9 +10,6 @@ import dulio.ui.Ui;
  * Marks a task as not completed.
  */
 public class UnmarkCommand extends Command {
-    /**
-     * One-based number of the task to unmark.
-     */
     private int taskNumber;
 
     /**
