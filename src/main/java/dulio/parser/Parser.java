@@ -33,6 +33,7 @@ public class Parser {
      * @throws DulioException If the date is not valid.
      */
     public static LocalDate parseDate(String date) throws DulioException {
+        assert date != null : "Date text must not be null";
         try {
             return LocalDate.parse(date);
         } catch (DateTimeParseException e) {
@@ -48,6 +49,7 @@ public class Parser {
      * @throws DulioException If the command is invalid.
      */
     public static Task parseTask(String line) throws DulioException {
+        assert line != null : "Task command must not be null";
         if (line.equals("todo") || line.startsWith("todo ")) {
             String description = line.length() > 5 ? line.substring(5).trim() : "";
             if (description.isEmpty()) {
@@ -92,6 +94,7 @@ public class Parser {
      * @throws DulioException If the command or its arguments are invalid.
      */
     public static Command parseCommand(String line) throws DulioException {
+        assert line != null : "Command line must not be null";
         if ("bye".equals(line)) {
             return new ExitCommand();
         }

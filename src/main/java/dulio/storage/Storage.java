@@ -25,6 +25,7 @@ public class Storage {
      * @param filePath The relative or absolute data-file path.
      */
     public Storage(Path filePath) {
+        assert filePath != null : "Storage file path must not be null";
         this.filePath = filePath;
     }
 
@@ -76,6 +77,8 @@ public class Storage {
      * @throws IOException If the file cannot be written.
      */
     public void save(List<Task> tasks) throws IOException {
+        assert tasks != null : "Task list to save must not be null";
+        assert !tasks.contains(null) : "Task list to save must not contain null tasks";
         Path parent = filePath.getParent();
         if (parent != null) {
             Files.createDirectories(parent);
