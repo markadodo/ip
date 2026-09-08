@@ -87,6 +87,34 @@ public class Parser {
     }
 
     /**
+     * Returns the task represented by a local storage record.
+     *
+     * @param line The stored task record.
+     * @return The parsed task, or null if the record is invalid.
+     */
+    public static Task parseStoredTask(String line) {
+        String[] fields = line.split("\\s\\|\\s", -1);
+        if (fields.length < 3 || !(fields[1].equals("0") || fields[1].equals("1"))) {
+            return null;
+        }
+
+        Task task;
+        try {
+            task = createStoredTask(fields);
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+        if (task == null) {
+            return null;
+        }
+
+        if (fields[1].equals("1")) {
+            task.markAsDone();
+        }
+        return task;
+    }
+
+    /**
      * Returns the executable command represented by a complete console line.
      *
      * @param line The complete console command.
@@ -126,6 +154,17 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DulioException("Invalid task index");
         }
+    }
+
+    private static Task createStoredTask(String[] fields) {
+        if (fields[0].equals("D") && fields.length == 4) {
+            return new Deadline(fields[2], LocalDate.parse(fields[3]));
+        } else if (fields[0].equals("E") && fields.length == 5) {
+            return new Event(fields[2], fields[3], fields[4]);
+        } else if (fields[0].equals("T") && fields.length == 3) {
+            return new Todo(fields[2]);
+        }
+        return null;
     }
 
     private static DulioException unknownCommand() {

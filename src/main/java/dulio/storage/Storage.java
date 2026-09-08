@@ -3,15 +3,13 @@ package dulio.storage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dulio.parser.Parser;
 import dulio.task.Deadline;
 import dulio.task.Event;
 import dulio.task.Task;
-import dulio.task.Todo;
 
 /**
  * Handles loading tasks from and saving tasks to the data file.
@@ -41,28 +39,10 @@ public class Storage {
         }
         try {
             for (String line : Files.readAllLines(filePath)) {
-                String[] fields = line.split("\\s\\|\\s", -1);
-                if (fields.length < 3 || !(fields[1].equals("0") || fields[1].equals("1"))) {
-                    continue;
+                Task task = Parser.parseStoredTask(line);
+                if (task != null) {
+                    loadedTasks.add(task);
                 }
-                Task task;
-                try {
-                    if (fields[0].equals("D") && fields.length == 4) {
-                        task = new Deadline(fields[2], LocalDate.parse(fields[3]));
-                    } else if (fields[0].equals("E") && fields.length == 5) {
-                        task = new Event(fields[2], fields[3], fields[4]);
-                    } else if (fields[0].equals("T") && fields.length == 3) {
-                        task = new Todo(fields[2]);
-                    } else {
-                        continue;
-                    }
-                } catch (DateTimeParseException e) {
-                    continue;
-                }
-                if (fields[1].equals("1")) {
-                    task.markAsDone();
-                }
-                loadedTasks.add(task);
             }
         } catch (IOException e) {
             return new ArrayList<>();
