@@ -15,14 +15,14 @@ Run the command-line UI tests recorded in `test/ui-test-plan.md`.
 1. Read `test/ui-test-plan.md` and identify the requested test cases. If the user supplied a command list and expected-output list, use those values for the session; otherwise run every case in the plan.
 2. If a case has an `Initial data file` section, write that exact content to the referenced path before launching the program. If it has no initial data section, preserve or remove existing test data according to the case setup and record the setup used.
 3. Confirm that each case has an aim, an ordered list of console inputs, and an ordered list of expected outputs.
-4. Compile the Java program before testing:
+4. Compile the Java program and its dependencies before testing:
    ```powershell
-   javac -d build src\main\java\*.java
+   .\gradlew.bat classes
    ```
    If compilation fails, stop and report the compiler output.
 5. For each test case, run the program from the repository root using its input list in order. Use a non-interactive standard-input pipeline, for example:
    ```powershell
-   @('todo borrow book', 'list', 'bye') | java -cp build Dulio
+   @('todo borrow book', 'list', 'bye') | java -cp build\classes\java\main dulio.Dulio
    ```
 5. Normalize only transport noise before comparison: convert CRLF to LF and trim trailing whitespace from each line. Do not remove application output, separators, blank lines, or prompt text.
 6. If the case has an `Expected data file` section, read the referenced file after the program exits and compare its normalized lines exactly with the expected contents. Do not skip file checks for persistence cases.

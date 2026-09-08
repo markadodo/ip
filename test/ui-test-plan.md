@@ -16,6 +16,7 @@ Verify that todo, deadline, and event commands create the correct task types, pr
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
@@ -32,7 +33,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-  [D][ ] return book (by: Jun 06 2019)
+   [D][ ] return book (by: Jun 06 2019)
    Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -67,6 +68,7 @@ Verify that `find` performs a case-insensitive search in task descriptions, pres
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
@@ -123,6 +125,7 @@ Verify that an ISO deadline date is parsed as a date, displayed in a readable fo
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
@@ -135,7 +138,7 @@ ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
    [D][ ] return book (by: Dec 02 2019)
-    Now you have 1 tasks in the list.
+   Now you have 1 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
  Here are the tasks in your list:
@@ -170,6 +173,7 @@ Verify that adding a todo, deadline, and event automatically creates or updates 
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
@@ -186,7 +190,7 @@ ____________________________________________________________
 ____________________________________________________________
 ____________________________________________________________
  Got it. I've added this task:
-  [D][ ] return book (by: Jun 06 2019)
+   [D][ ] return book (by: Jun 06 2019)
    Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
@@ -232,6 +236,7 @@ E | 0 | project meeting | Aug 6th 2pm | 4pm
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
@@ -264,6 +269,7 @@ Verify that an empty todo description and an unknown command produce clear error
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
@@ -305,6 +311,7 @@ Verify that deleting a task by its list number removes the correct typed task, s
 
 ### Expected output
 ```text
+____________________________________________________________
  ____  _   _ _     ___ ___
 |  _ \| | | | |   |_ _/ _ \
 | | | | | | | |    | | | | |
