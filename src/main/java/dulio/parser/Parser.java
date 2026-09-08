@@ -14,6 +14,7 @@ import dulio.command.UnmarkCommand;
 import dulio.exception.DulioException;
 import dulio.task.Deadline;
 import dulio.task.Event;
+import dulio.task.RecurringTask;
 import dulio.task.Task;
 import dulio.task.Todo;
 
@@ -82,6 +83,18 @@ public class Parser {
                 throw unknownCommand();
             }
             return new Event(description, from, to);
+        }
+        if (line.equals("recurring") || line.startsWith("recurring ")) {
+            int marker = line.indexOf(" /every ", 10);
+            if (marker < 0) {
+                throw new DulioException("OOPS!!! A recurring task needs a description and an /every interval.");
+            }
+            String description = line.substring(10, marker).trim();
+            String interval = line.substring(marker + 8).trim();
+            if (description.isEmpty() || interval.isEmpty()) {
+                throw new DulioException("OOPS!!! A recurring task needs a description and an /every interval.");
+            }
+            return new RecurringTask(description, interval);
         }
         throw unknownCommand();
     }
@@ -163,6 +176,8 @@ public class Parser {
             return new Event(fields[2], fields[3], fields[4]);
         } else if (fields[0].equals("T") && fields.length == 3) {
             return new Todo(fields[2]);
+        } else if (fields[0].equals("R") && fields.length == 4) {
+            return new RecurringTask(fields[2], fields[3]);
         }
         return null;
     }

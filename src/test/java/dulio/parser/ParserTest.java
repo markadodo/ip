@@ -3,6 +3,7 @@ package dulio.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,7 @@ import dulio.command.UnmarkCommand;
 import dulio.exception.DulioException;
 import dulio.task.Deadline;
 import dulio.task.Event;
+import dulio.task.RecurringTask;
 import dulio.task.Task;
 import dulio.task.Todo;
 
@@ -63,6 +65,29 @@ public class ParserTest {
         Event event = assertInstanceOf(Event.class, task);
         assertEquals("Mon", event.getFrom());
         assertEquals("Tue", event.getTo());
+    }
+
+    @Test
+    public void parseTask_recurringCommand_returnsRecurringTask() throws DulioException {
+        Task task = Parser.parseTask("recurring project meeting /every week");
+        RecurringTask recurringTask = assertInstanceOf(RecurringTask.class, task);
+        assertEquals("project meeting", recurringTask.getDescription());
+        assertEquals("week", recurringTask.getInterval());
+    }
+
+    @Test
+    public void parseTask_recurringWithoutInterval_throwsDulioException() {
+        DulioException exception = assertThrows(
+                DulioException.class, () -> Parser.parseTask("recurring project meeting"));
+        assertEquals("OOPS!!! A recurring task needs a description and an /every interval.", exception.getMessage());
+    }
+
+    @Test
+    public void parseStoredTask_recurringRecord_returnsRecurringTask() {
+        Task task = Parser.parseStoredTask("R | 1 | project meeting | week");
+        RecurringTask recurringTask = assertInstanceOf(RecurringTask.class, task);
+        assertTrue(recurringTask.isDone());
+        assertEquals("week", recurringTask.getInterval());
     }
 
     @Test
