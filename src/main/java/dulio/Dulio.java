@@ -13,16 +13,6 @@ import dulio.ui.Ui;
  * Coordinates Dulio's user interface, parser, commands, and task list.
  */
 public class Dulio {
-    /**
-     * Starts a Dulio session.
-     *
-     * @param args Command-line arguments, which are not used.
-     * @throws IOException If task data cannot be saved.
-     */
-    public static void main(String[] args) throws IOException {
-        new Dulio().run();
-    }
-
     private Ui ui;
     private TaskList tasks;
 
@@ -32,6 +22,16 @@ public class Dulio {
     public Dulio() {
         ui = new Ui();
         tasks = new TaskList();
+    }
+
+    /**
+     * Starts a Dulio session.
+     *
+     * @param args Command-line arguments, which are not used.
+     * @throws IOException If task data cannot be saved.
+     */
+    public static void main(String[] args) throws IOException {
+        new Dulio().run();
     }
 
     /**

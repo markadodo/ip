@@ -34,8 +34,7 @@ public class ParserTest {
 
     @Test
     public void parseDate_invalidFormat_throwsDulioException() {
-        DulioException exception = assertThrows(DulioException.class,
-            () -> Parser.parseDate("15/10/2019"));
+        DulioException exception = assertThrows(DulioException.class, () -> Parser.parseDate("15/10/2019"));
         assertEquals("OOPS!!! Please enter dates in yyyy-MM-dd format.", exception.getMessage());
     }
 
@@ -78,14 +77,12 @@ public class ParserTest {
 
     @Test
     public void parseTask_deadlineWithoutByDate_throwsDulioException() {
-        assertThrows(DulioException.class,
-            () -> Parser.parseTask("deadline return book"));
+        assertThrows(DulioException.class, () -> Parser.parseTask("deadline return book"));
     }
 
     @Test
     public void parseTask_eventWithoutEndTime_throwsDulioException() {
-        assertThrows(DulioException.class,
-            () -> Parser.parseTask("event project meeting /from Mon"));
+        assertThrows(DulioException.class, () -> Parser.parseTask("event project meeting /from Mon"));
     }
 
     @Test
@@ -135,15 +132,13 @@ public class ParserTest {
 
     @Test
     public void parseCommand_nonNumericMarkNumber_throwsDulioException() {
-        DulioException exception = assertThrows(DulioException.class,
-            () -> Parser.parseCommand("mark one"));
+        DulioException exception = assertThrows(DulioException.class, () -> Parser.parseCommand("mark one"));
         assertEquals("Invalid task index", exception.getMessage());
     }
 
     @Test
     public void parseCommand_nonNumericUnmarkNumber_throwsDulioException() {
-        DulioException exception = assertThrows(DulioException.class,
-            () -> Parser.parseCommand("unmark one"));
+        DulioException exception = assertThrows(DulioException.class, () -> Parser.parseCommand("unmark one"));
         assertEquals("Invalid task index", exception.getMessage());
     }
 

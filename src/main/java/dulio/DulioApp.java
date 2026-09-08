@@ -2,19 +2,24 @@ package dulio;
 
 import java.io.IOException;
 
+import dulio.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import dulio.gui.MainWindow;
-
 /**
  * Displays the initial Dulio JavaFX window.
  */
 public class DulioApp extends Application {
     private Dulio dulio = new Dulio();
+
+    /**
+     * Creates the Dulio JavaFX application.
+     */
+    public DulioApp() {
+    }
 
     /**
      * Creates and displays the initial Dulio window.

@@ -30,6 +30,12 @@ public class MainWindow extends AnchorPane {
     private Dulio dulio;
 
     /**
+     * Creates the controller for the main Dulio window.
+     */
+    public MainWindow() {
+    }
+
+    /**
      * Configures scrolling and displays the initial sample messages.
      */
     @FXML

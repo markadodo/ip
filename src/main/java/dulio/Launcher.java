@@ -6,6 +6,9 @@ import javafx.application.Application;
  * Starts the Dulio JavaFX application.
  */
 public class Launcher {
+    private Launcher() {
+    }
+
     /**
      * Launches the JavaFX application.
      *
