@@ -2,6 +2,54 @@
 
 The `test-ui` skill runs these cases from the repository root. Inputs are supplied to `Dulio` through standard input. Expected output is compared exactly after converting CRLF to LF and trimming trailing whitespace from each line.
 
+## Case: manage-recurring-task
+
+### Aim
+Verify that a recurring task accepts a repetition interval, appears in task listings, can be marked, and is persisted.
+
+### Inputs
+1. `recurring project meeting /every week`
+2. `list`
+3. `mark 1`
+4. `bye`
+
+### Expected output
+```text
+____________________________________________________________
+ ____  _   _ _     ___ ___
+|  _ \| | | | |   |_ _/ _ \
+| | | | | | | |    | | | | |
+| |_| | |_| | |___ | | |_| |
+|____/ \___/|_____|___\___/
+
+Hello! I'm Dulio.
+What can I do for you?
+____________________________________________________________
+____________________________________________________________
+ Got it. I've added this task:
+   [R][ ] project meeting (every: week)
+   Now you have 1 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+ Here are the tasks in your list:
+ 1.[R][ ] project meeting (every: week)
+____________________________________________________________
+____________________________________________________________
+ Nice! I've marked this task as done:
+   [R][X] project meeting (every: week)
+____________________________________________________________
+____________________________________________________________
+ Bye. Hope to see you again soon!
+____________________________________________________________
+```
+
+### Expected data file
+Path: `data/dulio.txt`
+
+```text
+R | 1 | project meeting | week
+```
+
 ## Case: add-and-list-task-types
 
 ### Aim

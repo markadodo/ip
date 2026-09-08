@@ -9,6 +9,7 @@ import java.util.List;
 import dulio.parser.Parser;
 import dulio.task.Deadline;
 import dulio.task.Event;
+import dulio.task.RecurringTask;
 import dulio.task.Task;
 
 /**
@@ -71,6 +72,9 @@ public class Storage {
             } else if (task instanceof Event event) {
                 lines.add("E | " + status + " | " + event.getDescription() + " | "
                     + event.getFrom() + " | " + event.getTo());
+            } else if (task instanceof RecurringTask recurringTask) {
+                lines.add("R | " + status + " | " + recurringTask.getDescription() + " | "
+                    + recurringTask.getInterval());
             } else {
                 lines.add("T | " + status + " | " + task.getDescription());
             }

@@ -88,4 +88,14 @@ public class TaskTest {
         assertEquals("read book", task.toString());
         assertEquals("T", task.getTypeIcon());
     }
+
+    @Test
+    public void recurringTask_methodsReturnRecurrenceDetails() {
+        RecurringTask task = new RecurringTask("project meeting", "week");
+
+        assertEquals("project meeting", task.getDescription());
+        assertEquals("week", task.getInterval());
+        assertEquals("project meeting (every: week)", task.toString());
+        assertEquals("R", task.getTypeIcon());
+    }
 }
