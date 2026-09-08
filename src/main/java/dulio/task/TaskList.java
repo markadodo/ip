@@ -37,7 +37,7 @@ public class TaskList {
      * @param task The task to add.
      * @throws IOException If the task list cannot be saved.
      */
-    public void store(Task task) throws IOException {
+    public void add(Task task) throws IOException {
         tasks.add(task);
         storage.save(tasks);
     }

@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) throws IOException {
-        tasks.store(task);
+        tasks.add(task);
         ui.showAdded(task, tasks.size());
     }
 }
