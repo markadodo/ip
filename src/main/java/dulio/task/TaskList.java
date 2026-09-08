@@ -27,8 +27,11 @@ public class TaskList {
      * @param storage The persistence service to use.
      */
     public TaskList(Storage storage) {
+        assert storage != null : "Task list storage must not be null";
         this.storage = storage;
         tasks = storage.load();
+        assert tasks != null : "Storage must return a task list";
+        assert !tasks.contains(null) : "Loaded task list must not contain null tasks";
     }
 
     /**
@@ -38,7 +41,10 @@ public class TaskList {
      * @throws IOException If the task list cannot be saved.
      */
     public void add(Task task) throws IOException {
+        assert task != null : "Task to add must not be null";
+        int previousSize = tasks.size();
         tasks.add(task);
+        assert tasks.size() == previousSize + 1 : "Adding a task must increase the list size by one";
         storage.save(tasks);
     }
 
@@ -67,6 +73,7 @@ public class TaskList {
      * @return The formatted matching tasks.
      */
     public String find(String keyword) {
+        assert keyword != null : "Search keyword must not be null";
         String normalizedKeyword = keyword.toLowerCase(Locale.ENGLISH);
         ArrayList<Task> matchingTasks = new ArrayList<>();
         ArrayList<Integer> matchingNumbers = new ArrayList<>();
@@ -88,6 +95,8 @@ public class TaskList {
     }
 
     private String formatTasks(ArrayList<Task> tasksToFormat, ArrayList<Integer> taskNumbers) {
+        assert tasksToFormat.size() == taskNumbers.size()
+                : "Each formatted task must have exactly one display number";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasksToFormat.size(); i++) {
             Task task = tasksToFormat.get(i);
@@ -110,6 +119,7 @@ public class TaskList {
             return null;
         }
         tasks.get(idx).markAsDone();
+        assert tasks.get(idx).isDone() : "Marked task must be completed";
         storage.save(tasks);
         return tasks.get(idx);
     }
@@ -127,6 +137,7 @@ public class TaskList {
             return null;
         }
         tasks.get(idx).markAsNotDone();
+        assert !tasks.get(idx).isDone() : "Unmarked task must be incomplete";
         storage.save(tasks);
         return tasks.get(idx);
     }
@@ -143,7 +154,10 @@ public class TaskList {
         if (idx < 0 || idx >= tasks.size()) {
             return null;
         }
+        int previousSize = tasks.size();
         Task deletedTask = tasks.remove(idx);
+        assert deletedTask != null : "Deleted task must not be null";
+        assert tasks.size() == previousSize - 1 : "Deleting a task must decrease the list size by one";
         storage.save(tasks);
         return deletedTask;
     }
