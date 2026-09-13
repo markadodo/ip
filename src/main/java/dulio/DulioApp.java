@@ -33,6 +33,7 @@ public class DulioApp extends Application {
             AnchorPane mainLayout = fxmlLoader.load();
             Scene scene = new Scene(mainLayout);
             stage.setScene(scene);
+            stage.setTitle("Dulio");
             fxmlLoader.<MainWindow>getController().setDulio(dulio);
             stage.show();
         } catch (IOException e) {
