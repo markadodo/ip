@@ -30,6 +30,10 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) throws IOException {
+        if (tasks.containsEquivalent(task)) {
+            ui.showError("OOPS!!! This task already exists.");
+            return;
+        }
         tasks.add(task);
         ui.showAdded(task, tasks.size());
     }

@@ -51,6 +51,7 @@ public class Parser {
      */
     public static Task parseTask(String line) throws DulioException {
         assert line != null : "Task command must not be null";
+        validateCommandText(line);
         if (line.equals("todo") || line.startsWith("todo ")) {
             String description = line.length() > 5 ? line.substring(5).trim() : "";
             if (description.isEmpty()) {
@@ -60,7 +61,7 @@ public class Parser {
         }
         if (line.startsWith("deadline ")) {
             int marker = line.indexOf(" /by ", 9);
-            if (marker < 0) {
+            if (marker < 0 || line.indexOf(" /by ", marker + 5) >= 0) {
                 throw unknownCommand();
             }
             String description = line.substring(9, marker).trim();
@@ -73,7 +74,9 @@ public class Parser {
         if (line.startsWith("event ")) {
             int fromMarker = line.indexOf(" /from ", 6);
             int toMarker = fromMarker < 0 ? -1 : line.indexOf(" /to ", fromMarker + 7);
-            if (fromMarker < 0 || toMarker < 0) {
+            if (fromMarker < 0 || toMarker < 0
+                    || line.indexOf(" /from ", fromMarker + 7) >= 0
+                    || line.indexOf(" /to ", toMarker + 5) >= 0) {
                 throw unknownCommand();
             }
             String description = line.substring(6, fromMarker).trim();
@@ -86,7 +89,7 @@ public class Parser {
         }
         if (line.equals("recurring") || line.startsWith("recurring ")) {
             int marker = line.indexOf(" /every ", 10);
-            if (marker < 0) {
+            if (marker < 0 || line.indexOf(" /every ", marker + 8) >= 0) {
                 throw new DulioException("OOPS!!! A recurring task needs a description and an /every interval.");
             }
             String description = line.substring(10, marker).trim();
@@ -136,6 +139,7 @@ public class Parser {
      */
     public static Command parseCommand(String line) throws DulioException {
         assert line != null : "Command line must not be null";
+        validateCommandText(line);
         if ("bye".equals(line)) {
             return new ExitCommand();
         }
@@ -163,7 +167,11 @@ public class Parser {
 
     private static int parseTaskNumber(String value) throws DulioException {
         try {
-            return Integer.parseInt(value);
+            int taskNumber = Integer.parseInt(value);
+            if (taskNumber < 1) {
+                throw new DulioException("Invalid task index");
+            }
+            return taskNumber;
         } catch (NumberFormatException e) {
             throw new DulioException("Invalid task index");
         }
@@ -184,5 +192,14 @@ public class Parser {
 
     private static DulioException unknownCommand() {
         return new DulioException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    private static void validateCommandText(String line) throws DulioException {
+        if (line.isBlank()) {
+            throw new DulioException("OOPS!!! Please enter a command.");
+        }
+        if (!line.equals(line.trim()) || line.matches(".*\\s{2,}.*")) {
+            throw new DulioException("OOPS!!! Please use single spaces and no leading or trailing spaces.");
+        }
     }
 }

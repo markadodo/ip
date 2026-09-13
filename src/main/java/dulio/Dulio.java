@@ -53,6 +53,8 @@ public class Dulio {
                 isExit = command.isExit();
             } catch (DulioException e) {
                 ui.showError(e.getMessage());
+            } catch (IOException e) {
+                ui.showError("Unable to save your task right now. Please check that the data file is writable.");
             }
         }
         ui.close();

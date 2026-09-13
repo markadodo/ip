@@ -49,6 +49,23 @@ public class TaskList {
     }
 
     /**
+     * Returns whether a task with the same type and details already exists.
+     *
+     * @param task The task to compare against existing tasks.
+     * @return True if an equivalent task exists.
+     */
+    public boolean containsEquivalent(Task task) {
+        assert task != null : "Task to compare must not be null";
+        for (Task existingTask : tasks) {
+            if (existingTask.getTypeIcon().equals(task.getTypeIcon())
+                    && existingTask.toString().equals(task.toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns the number of tasks.
      *
      * @return The number of tasks.
