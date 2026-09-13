@@ -2,6 +2,7 @@ package dulio.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -168,7 +169,51 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_negativeTaskNumber_returnsCommand() throws DulioException {
-        assertInstanceOf(DeleteCommand.class, Parser.parseCommand("delete -1"));
+    public void parseCommand_negativeTaskNumber_throwsDulioException() {
+        assertThrows(DulioException.class, () -> Parser.parseCommand("delete -1"));
+    }
+
+    @Test
+    public void parseCommand_zeroTaskNumber_throwsDulioException() {
+        assertThrows(DulioException.class, () -> Parser.parseCommand("delete 0"));
+    }
+
+    @Test
+    public void parseCommand_blankCommand_throwsDulioException() {
+        DulioException exception = assertThrows(DulioException.class, () -> Parser.parseCommand("   "));
+        assertEquals("OOPS!!! Please enter a command.", exception.getMessage());
+    }
+
+    @Test
+    public void parseCommand_repeatedSpaces_throwsDulioException() {
+        assertThrows(DulioException.class, () -> Parser.parseCommand("todo  read book"));
+    }
+
+    @Test
+    public void parseCommand_leadingAndTrailingSpaces_throwsDulioException() {
+        assertThrows(DulioException.class, () -> Parser.parseCommand(" todo read book "));
+    }
+
+    @Test
+    public void parseTask_duplicateDeadlineParameter_throwsDulioException() {
+        assertThrows(DulioException.class,
+                () -> Parser.parseTask("deadline submit report /by 2025-01-01 /by 2025-01-02"));
+    }
+
+    @Test
+    public void parseTask_duplicateEventParameter_throwsDulioException() {
+        assertThrows(DulioException.class,
+                () -> Parser.parseTask("event meeting /from Mon /from Tue /to Wed"));
+    }
+
+    @Test
+    public void parseTask_impossibleDeadlineDate_throwsDulioException() {
+        assertThrows(DulioException.class,
+                () -> Parser.parseTask("deadline submit report /by 2025-02-30"));
+    }
+
+    @Test
+    public void parseStoredTask_malformedRecord_returnsNull() {
+        assertNull(Parser.parseStoredTask("D | 0 | submit report | not-a-date"));
     }
 }
